@@ -1,0 +1,39 @@
+<view class="title">
+  <text>{{confo_info.name}}</text>
+</view>
+<view class="infomation">
+  <van-row span="8">
+    <image src="/image/s_time.png"></image>
+    <text>开始: {{confo_info.s_time}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/e_time.png"></image>
+    <text>结束: {{confo_info.e_time}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/room.png"></image>
+    <text>地点: {{confo_info.room}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/people.png"></image>
+    <text>召集者: {{confo_info.people}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/attendee.png"></image>
+    <text>参会人: </text>
+  </van-row>
+  <van-row span="8">
+   <view class="other">
+      <text>{{confo_info.attendee}}</text>
+   </view>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/word.png"></image>
+    <text>会议说明: </text>
+  </van-row>
+  <van-row span="8">
+   <view class="other">
+      <text>{{confo_info.other}}</text>
+   </view>
+  </van-row>
+</view>

@@ -1,0 +1,30 @@
+<!--compoents/weekCalendar/weekCalendar.wxml-->
+<view class='line'></view>
+ 
+<view class='row'>
+  <view class='row' bindtap='lastWeek'>
+    <!-- <text class='iconfont icon-sanjiaoleft' style='padding:15rpx;color:#999999'></text> -->
+    <image src="/image/prelink.png" class="prelink" style="padding-right: 10px;"></image>
+    <view style='font-size:18px;'>上一周</view>
+  </view>
+  <view class='timeType'>{{timeBean.yearMonth}}</view>
+  <view class='row' bindtap='nextWeek'>
+    <view style='font-size:18px;'>下一周</view>
+    <!-- <text class='iconfont icon-sanjiaoright' style='padding:15rpx;color:#999999'></text> -->
+    <image src="/image/nextlink.png" class="prelink" style="padding-left: 10px;"></image>
+  </view>
+</view>
+ 
+<view class='row rowmax'>
+    <view  wx:for="0123456" data-index="{{index}}" class='{{index==timeBean.selectDay?"select-column":"column"}}' bindtap='itemClick' wx:key="key">
+      <view class='weekType'>{{timeBean.weekDayList[index].week}}</view>
+      <view class='dateType'>{{timeBean.weekDayList[index].day}}</view>
+      <!-- <text class='iconfont icon-mifan' style='color:#fff'></text> -->
+    </view>
+</view>
+ 
+<view class='line-shadow'></view>
+ 
+<view class='suspension' bindtap='addMenuClick'>
+  <text class='iconfont icon-tianjia' style='font-size:60rpx; color:#fff;'></text>
+</view>

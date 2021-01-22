@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view>
+  <view class="logo1">
+    <image src='/image/logo.png'></image>
+  </view>
+  <view class="cell_group">
+  <van-cell-group>
+    <van-field
+        model:value="{{ username }}"
+        required
+        clearable
+        label="用户名"
+        placeholder="请输入用户名"
+        bind:click-icon="onClickIcon"
+    />
+    <van-field
+        model:value="{{ password }}"
+        type="password"
+        label="密码"
+        placeholder="请输入密码"
+        required
+        border="{{ false }}"
+    />
+    </van-cell-group>
+  </view>
+  <view class="login_button">
+    <van-button type="primary" color="#FFCD36" class="loginbu" bindtap="Login">登录</van-button>
+  </view>
+  <view class="logo2">
+  <image src="/image/logo2.png"></image>
+  </view>
+  <van-notify id="van-notify" />
+</view>

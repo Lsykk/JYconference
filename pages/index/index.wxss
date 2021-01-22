@@ -1,0 +1,36 @@
+/**index.wxss**/
+.logo1 {
+  height: 360rpx;
+  background-color: #FFCD36;
+}
+.logo1 image {
+  width: 100%;
+  height: 300rpx;
+}
+.cell_group {
+  height: 250rpx;
+}
+
+.cell_group van-cell-group {
+  display: block;
+  margin: 20rpx;
+  margin-top: 100rpx;
+}
+.login_button {
+  text-align: center;
+}
+.van-button--primary {
+  width: 500rpx;
+}
+.logo2 {
+  height: 300px;
+}
+.logo2 image {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 150px auto;
+}
+.van-cell--borderless {
+  margin-top: 40rpx;
+}

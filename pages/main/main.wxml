@@ -1,0 +1,83 @@
+<scorll-view scroll-y="true" style="height: 100vh;">
+  <!-- 日历 -->
+  <view>
+    <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar>
+  </view>
+  <!-- 列表 -->
+  <view class="main">
+    <van-row>
+      <van-col span="4" ></van-col>
+      <van-col span="5" class="room1">
+        <text>30#大</text>
+      </van-col>
+      <van-col span="5" class="room2">
+        <text>30#小</text>
+      </van-col>
+      <van-col span="5" class="room3">
+        <text>38#大</text>
+      </van-col>
+      <van-col span="5" class="room4">
+        <text>上海#大</text>
+      </van-col>
+    </van-row>
+    <van-row>
+      <van-col span="4" class="conference_time">
+      <view class='weui-cell-third'>
+      <block wx:for="{{time_line}}" wx:key="key">
+        <view class='weui-cell-list'>
+          <view class='weui-cell-circle'></view>
+          <view class='weui-cell-line'>
+            <view class='weui-cell-time'>{{item.time}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+      </van-col>
+      <van-col span="5" class="conference1">
+      <!-- <view>{{datastring}}</view> -->
+          <view class="discovermain">
+                <view class="hot">
+                    <view class="hot-item1" wx:if="{{item.room == '30#大'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
+                    style="height:{{item.length}};margin-top: {{item.m_top}};">
+                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itempeople">{{item.people}}</view>
+                    </view>
+                </view>
+            </view>
+      </van-col>
+      <van-col span="5" class="conference2">
+            <view class="discovermain">
+                <view class="hot">
+                    <view class="hot-item2" wx:if="{{item.room == '30#小'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
+                    style="height:{{item.length}};margin-top: {{item.m_top}};">
+                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itempeople">{{item.people}}</view>
+                    </view>
+                </view>
+            </view>
+      </van-col>
+      <van-col span="5" class="conference3">
+            <view class="discovermain">
+                <view class="hot">
+                    <view class="hot-item3" wx:if="{{item.room == '38#大'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_b}}" wx:key="key" bindtap="Tapiteminfo"
+                    style="height:{{item.length}};margin-top: {{item.m_top}};">
+                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itempeople">{{item.people}}</view>
+                    </view>
+                </view>
+            </view>
+      </van-col>
+      <van-col span="5" class="conference4">
+            <view class="discovermain">
+                <view class="hot">
+                    <view class="hot-item4" wx:if="{{item.room == '上海#大'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
+                    style="height:{{item.length}};margin-top: {{item.m_top}};">
+                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itempeople">{{item.people}}</view>
+                    </view>
+                </view>
+            </view>
+      </van-col>
+    </van-row>
+  </view>
+</scorll-view>

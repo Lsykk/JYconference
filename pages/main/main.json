@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#FFCD36",
+  "navigationBarTitleText": "会议中心",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "weekCalendar": "../../components/weekCalendar/weekCalendar"
+  }
+}
