@@ -77,7 +77,8 @@ Page({
         e_time:"2021-01-21 11:30:00",
         attendee:['BBB','BBB','BBB','BBB','BBB','BBB'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       }, {
         id:'002',
         room: "30#大",
@@ -88,7 +89,8 @@ Page({
         e_time:"2021-01-21 16:30:00",
         attendee:['AAA','AAA','AAA','AAA','AAA','AAA'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       }, 
       {
         id:'003',
@@ -100,7 +102,8 @@ Page({
         e_time:"2021-01-21 09:30:00",
         attendee:['CCC','CCC','CCC','CCC','CCC','CCC'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       },{
         id:'004',
         room: "38#大",
@@ -111,7 +114,8 @@ Page({
         e_time:"2021-01-21 11:30:00",
         attendee:['DDD','DDD','DDD','DDD','DDD','DDD'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       }, {
         id:'005',
         room: "上海#大",
@@ -122,7 +126,8 @@ Page({
         e_time:"2021-01-21 16:30:00",
         attendee:['EEE','EEE','EEE','EEE','EEE','EEE'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       }, {
         id:'006',
         room: "38#大",
@@ -133,7 +138,8 @@ Page({
         e_time:"2021-01-21 17:30:00",
         attendee:['FFF','FFF','FFF','FFF','FFF','FFF'],
         length:"",
-        m_top:''
+        m_top:'',
+        titlem_top:''
       }
     ];
     // console.log(datas)
@@ -151,13 +157,20 @@ Page({
       // console.log((chuo_s - 1611189000000 )/ 324000);
       var length_num = (chuo_e - chuo_s) / 30000 ;
       var m_top_num = (chuo_s - 1611189000000 )/ 324000 * 2.6 ;
+      var titlem_top_num = length_num * 0.4;
+      if ( length_num <= 100) {
+        titlem_top_num =  length_num * 0.1;
+      }
       var length_string = length_num.toString()+"px";
       var m_top_string = m_top_num.toString() + "%";
+      var titlem_top_string = titlem_top_num.toString() + "px";
       const state1 = "Conference_list["+ i +"].length"
       const state2 = "Conference_list["+ i +"].m_top"
+      const state3 = "Conference_list["+ i +"].titlem_top"
       this.setData({
         [state2]: m_top_string,
-        [state1]: length_string
+        [state1]: length_string,
+        [state3]: titlem_top_string,
       });
     }
     //分组 根据会议室不同将Conference_list分成四个数组

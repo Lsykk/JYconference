@@ -14,7 +14,7 @@
         <text>30#小</text>
       </van-col>
       <van-col span="5" class="room3">
-        <text>38#大</text>
+        <text>38#小</text>
       </van-col>
       <van-col span="5" class="room4">
         <text>上海#大</text>
@@ -39,7 +39,7 @@
                 <view class="hot">
                     <view class="hot-item1" wx:if="{{item.room == '30#大'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
-                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
                     </view>
                 </view>
@@ -50,7 +50,7 @@
                 <view class="hot">
                     <view class="hot-item2" wx:if="{{item.room == '30#小'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
-                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
                     </view>
                 </view>
@@ -61,7 +61,7 @@
                 <view class="hot">
                     <view class="hot-item3" wx:if="{{item.room == '38#大'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_b}}" wx:key="key" bindtap="Tapiteminfo"
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
-                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
                     </view>
                 </view>
@@ -72,7 +72,7 @@
                 <view class="hot">
                     <view class="hot-item4" wx:if="{{item.room == '上海#大'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
-                        <view class="itemtitle">{{item.title}}</view>
+                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
                     </view>
                 </view>
