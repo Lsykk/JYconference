@@ -1,8 +1,7 @@
 {
   "pages":[
-    "pages/main/main",
     "pages/index/index",
-    
+    "pages/main/main",
     "pages/info/info"
   ],
   "window":{
@@ -19,6 +18,7 @@
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-notify": "@vant/weapp/notify/index"
+    "van-notify": "@vant/weapp/notify/index",
+    "van-toast": "@vant/weapp/toast/index"
   }
 }

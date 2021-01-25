@@ -24,10 +24,11 @@
     </van-cell-group>
   </view>
   <view class="login_button">
-    <van-button type="primary" color="#FFCD36" class="loginbu" bindtap="Login">登录</van-button>
+    <van-button type="primary" color="#FFCD36" class="loginbu" bindtap="Login_first">登录</van-button>
   </view>
   <view class="logo2">
   <image src="/image/logo2.png"></image>
   </view>
   <van-notify id="van-notify" />
+  <van-toast id="van-toast" />
 </view>

@@ -59,7 +59,7 @@
       <van-col span="5" class="conference3">
             <view class="discovermain">
                 <view class="hot">
-                    <view class="hot-item3" wx:if="{{item.room == '38#大'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_b}}" wx:key="key" bindtap="Tapiteminfo"
+                    <view class="hot-item3" wx:if="{{item.room == '38#大'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_s}}" wx:key="key" bindtap="Tapiteminfo"
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
                         <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
