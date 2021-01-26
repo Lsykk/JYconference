@@ -1,4 +1,3 @@
-<!--index.wxml-->
 <view>
   <view class="logo1">
     <image src='/image/logo.png'></image>

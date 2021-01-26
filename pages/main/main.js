@@ -51,38 +51,27 @@ Page({
     username:'',
     Request_date:''
   },
-  //接收username
   onLoad: function (option) {
-    //默认先获取当天的会议列表
-    //页面跳转传值 接收username
-    console.log(option);
-    //更新全局username值
+    // console.log(option);
     this.setData({
       username: option.username
     });
-    //请求当天会议信息
     this.onRequest();
   },
-  //获取token
   onRequest:function(){
-    //获取数据 赋值
-    // const nowdate = util.formatTime(new Date()) ; //当前日期
-    // const nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
-    // console.log(nowdate_deal);
-    // 获取token
     let _that = this;
-    const key = 'A1B2C3D4E5F60708'; //密钥
-    const nowdate = util.formatTime(new Date()) ; //当前日期
+    const key = 'A1B2C3D4E5F60708';
+    const nowdate = util.formatTime(new Date()) ;
     const nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     console.log(nowdate_deal);
     this.setData({
       Request_date: nowdate_deal
     })
-    const secstring = _that.data.username + '|' + nowdate ; //拼接串
-    const secstr = BASE64.encoder(DES3.encrypt(key, secstring));//加密串
-    //请求token
+    const secstring = _that.data.username + '|' + nowdate ;
+    const secstr = BASE64.encoder(DES3.encrypt(key, secstring));
+    //发请求 获取token
     wx.request({
-        url: 'https://118.31.73.43:9389/wuchan/wexin/getToken',
+        url: 'http://118.31.73.43:9389/wuchan/weixin/getToken.jsp',
         method: "post",
         data: {
             login: _that.data.username,
@@ -90,13 +79,12 @@ Page({
             secstr: secstr 
         },
         header: {
-          'content-type': 'application/json' // 默认值
+          'content-type': 'application/json'
         },
         success (res) {
           console.log("获取token成功")
           console.log(res.data)
           var newtoken = 'newtoken';
-          //更新全局token值
           _that.setData({
             user_token: newtoken
           });
@@ -104,18 +92,12 @@ Page({
         },
         fail (res) {
           console.log("获取token失败");
-          //最后要注释掉
-          _that.onGetConfList();
+          console.log(res.data)
+          // _that.onGetConfList();
         }
     })
-
   },
-  //获取会议室列表
   onGetConfList: function() {
-    //接口函数
-    //接口地址：http://118.31.73.43:9389/wuchan/wexin/meeting
-    //参数值：{token:,startdate:”2020-01-20”,enddate:”2020-01-25”}
-    //会议列表赋值给Conference_list
     let datas = [
       {
           id:'001',
@@ -192,10 +174,11 @@ Page({
           titlem_top:''
         }
       ];
-
+    //获取会议室信息
     let _that = this;
     wx.request({
-        url: 'https://118.31.73.43:9389/wuchan/wexin/meeting',
+        url: 'http://118.31.73.43:9389/wuchan/weixin/meeting.jsp',
+        // url: 'http://118.31.73.43:9389',
         method: "post",
         data: {
           token: _that.data.user_token,
@@ -203,10 +186,11 @@ Page({
           enddate: _that.data.Request_date
         },
         header: {
-          'content-type': 'application/json' // 默认值
+          'content-type': 'application/json'
         },
         success (res) {
           console.log("获取token成功");
+          console.log(res.data)
           _that.setData({
             Conference_list : datas
           });
@@ -214,23 +198,19 @@ Page({
         },
         fail (res) {
           console.log("获取token失败");
-          //最后要注释掉
-          _that.setData({
-            Conference_list : datas
-          });
-          _that.onListDeal();
+          console.log(res.data)
+          // _that.setData({
+          //   Conference_list : datas
+          // });
+          // _that.onListDeal();
         }
     })
   },
   onListDeal:function() {
-    //修改Conference_list的length和m_top属性和titlem_top属性
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         var chuo_s = new Date(this.data.Conference_list[i].s_time.replace(/-/g,"/")).getTime()
         var chuo_e = new Date(this.data.Conference_list[i].e_time.replace(/-/g,"/")).getTime()
         var length_num = (chuo_e - chuo_s) / 30000 ;
-        // console.log(chuo_s);
-        // console.log(chuo_e - chuo_s);
-        // console.log((chuo_s - 1611189000000 )/ 324000);
         var length_num = (chuo_e - chuo_s) / 30000 ;
         var m_top_num = (chuo_s - 1611189000000 )/ 324000 * 2.6 ;
         var titlem_top_num = length_num * 0.4;
@@ -249,10 +229,9 @@ Page({
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
-          [state3]: titlem_top_string,
+          [state3]: titlem_top_string
         });
       }
-      //分组 根据会议室不同将Conference_list分成四个数组
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         if ( this.data.Conference_list[i].room == '30#大')
           this.data.thirty_b.push(this.data.Conference_list[i]);
@@ -263,7 +242,6 @@ Page({
         else
           this.data.shanghai_b.push(this.data.Conference_list[i]);
       }
-      //更新四个会议室数组
       this.setData({
         thirty_b : this.data.Conference_list,
         thirty_s : this.data.Conference_list,
@@ -298,22 +276,9 @@ Page({
       show: false,
       date: datestring,
     });
-
-    //datestring 格式处理成 2020-01-20 格式
-    //接口函数
-    //接口地址：http://118.31.73.43:9389/wuchan/wexin/meeting
-    //参数值：{token:,startdate:”2020-01-20”,enddate:”2020-01-25”}
-
-
-
-    //会议列表赋值给Conference_list
-    //刷新页面
-
-
   },
+  //查看会议详情
   Tapiteminfo: function(e){
-    //根据id 筛选出会议 显示会议详情
-    // console.log("点击查看详情")
     console.log(e.currentTarget.dataset.id)
     var iteminfo_object = this.data.Conference_list.find(item => item.id == e.currentTarget.dataset.id)
     console.log(iteminfo_object)

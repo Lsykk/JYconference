@@ -1,0 +1,35 @@
+.time {
+  display: block;
+  padding: 35rpx;
+  font-size: 35rpx;
+  /* font-weight: bold; */
+}
+.sche_time {
+  width: 20%;
+  height: 110rpx;
+  /* margin-top: 20px; */
+  /* background-color: yellow; */
+  float: left;
+}
+.sche_time text {
+  display: block;
+  padding: 35rpx;
+  font-size: 35rpx;
+  /* font-weight: bold; */
+}
+.sche_main {
+  width: 80%;
+  height: 110rpx;
+  margin-top: 20px;
+  background-color: #D8F4E6;
+  margin-left: 20%;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.sche_main text {
+  display: block;
+  padding-top: 30rpx;
+  font-size: 35rpx;
+  /* font-weight: bold; */
+  padding-left: 50rpx;  
+}

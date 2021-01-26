@@ -1,0 +1,20 @@
+<scorll-view scroll-y="true" style="height: 100vh;">
+  <!-- 日历 -->
+  <view>
+    <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar>
+  </view>
+  <!-- 列表 -->
+  <view>
+    <view class="time">上午</view>
+    <view>
+      <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo" >
+        <view class="sche_time">
+          <text>{{item.s_time}}</text>
+        </view>
+        <view class="sche_main">
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</scorll-view>

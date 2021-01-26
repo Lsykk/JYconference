@@ -1,14 +1,46 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/schedule/schedule",
+    
     "pages/main/main",
-    "pages/info/info"
+    "pages/info/info",
+    
+    "pages/schedule_info/schedule_info",
+    "pages/train/train",
+    "pages/train_info/train_info"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#FFCD36",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "会议中心",
+        "iconPath": "image/conf.png",
+        "selectedIconPath": "image/conf_on.png"
+      },
+      {
+        "pagePath": "pages/train/train",
+        "text": "培训会议",
+        "iconPath": "image/train.png",
+        "selectedIconPath": "image/train_on.png"
+      },
+      {
+        "pagePath": "pages/schedule/schedule",
+        "text": "行程安排",
+        "iconPath": "image/sche.png",
+        "selectedIconPath": "image/sche_on.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
