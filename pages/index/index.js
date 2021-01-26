@@ -2,8 +2,11 @@
 let DES3 = require("../../utils/DES3.js");
 let BASE64 = require("../../utils/Base64.js");
 var util = require("../../utils/util");
-var CryptoJS = require('../../utils/tripledes')
-var keyHex = CryptoJS.enc.Utf8.parse("A1B2C3D4E5F60708");
+// var CryptoJS = require('../../utils/tripledes')
+
+var CryptoJS = require("../../utils/cryptojs");
+
+// var keyHex = CryptoJS.enc.Utf8.parse("A1B2C3D4E5F60708");
 import md5 from "../../utils/MD5";
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
@@ -15,7 +18,8 @@ Page({
     password:'',
     token:'undefined_token',
     Paramstring:'',
-    Param_json:''
+    Param_json:'',
+    loginstring:''
   },
   Login_first: function(){
     if ( this.data.username == '' || this.data.password == ''){
@@ -29,20 +33,13 @@ Page({
       let nowdate = util.formatTime(new Date()) ;
       let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
       let secstring = this.data.username + nowdate_deal ;
-      login = "ttt"
-      nowdate_deal = "2021-01-25"
-      secstring = "ttt2021-01-25" ;
+      // login = "ttt"
+      // nowdate_deal = "2021-01-25"
+      // secstring = "ttt2021-01-25" ;
       console.log(secstring);
-      //des3加密
-      // const secstr = BASE64.encoder(DES3.encrypt(key, secstring));
-      //des（ecb模式）加密
-      var secstr_desecb = CryptoJS.DES.encrypt( "ttt2021-01-25","A1B2C3D4E5F60708",{
-          mode: CryptoJS.mode.ECB,
-          padding: CryptoJS.pad.Pkcs7
-      });
-      //测试 加密之后
-      const secstr = secstr_desecb.toString();
-      console.log("加密之后"+ secstr );
+      const secstr = md5.hexMD5(secstring);
+      // console.log("MD5:"+secstr)
+
       const param = {
         login: login,
         nowdate: nowdate_deal,
@@ -60,7 +57,7 @@ Page({
       //发请求 获取token
       let _that = this;
       wx.request({
-        url: 'http://118.31.73.43:9389/wuchan/weixin/getToken.jsp?tokenParam='+ _that.data.Paramstring,
+        url: 'http://118.31.73.43:9389/wuchan/weixin/getToken.jsp'+'?'+'tokenParam='+ _that.data.Paramstring,
         method: "post",
         data : {
           "tokenParam" : _that.data.Paramstring
@@ -70,8 +67,11 @@ Page({
         },
         success (res) {
           console.log("获取token成功");
-          console.log(res);
-          // this.Login_second();
+          console.log("获取到的token" + res.data.token);
+          _that.setData({
+            token : res.data.token
+          })
+          _that.Login_second();
         },
         fail (res) {
           console.log("获取token失败");
@@ -84,21 +84,30 @@ Page({
   Login_second() {
     const darkpassword = md5.hexMD5(this.data.password);
     console.log(darkpassword);
+    const param = {
+      login: this.data.username,
+      userpassword: darkpassword,
+      token: this.data.token 
+    }
+    console.log("登录验证的参数token" + param.token);
+    console.log(param);
+    const paramstring = JSON.stringify(param) ;
+    this.setData({
+      loginstring : paramstring
+    })
     let _that = this;
     wx.request({
-      url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp',
+      url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
       method: "post",
       data: {
-          login: _that.data.username,
-          userpassword: darkpassword,
-          token: _that.data.token
+          "login" : _that.data.loginstring
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'text/plain'
       },
       success (res) {
         console.log("登录成功")
-        // console.log(res.data)
+        console.log(res)
         Toast.success('登录成功!');
         // var username= _that.data.username;
         // wx.navigateTo({

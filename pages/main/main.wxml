@@ -37,7 +37,7 @@
       <!-- <view>{{datastring}}</view> -->
           <view class="discovermain">
                 <view class="hot">
-                    <view class="hot-item1" wx:if="{{item.room == '30#大'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
+                    <view class="hot-item1" wx:if="{{item.room == '30楼大会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
                         <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
@@ -48,7 +48,7 @@
       <van-col span="5" class="conference2">
             <view class="discovermain">
                 <view class="hot">
-                    <view class="hot-item2" wx:if="{{item.room == '30#小'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
+                    <view class="hot-item2" wx:if="{{item.room == '30楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
                         <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
@@ -59,7 +59,7 @@
       <van-col span="5" class="conference3">
             <view class="discovermain">
                 <view class="hot">
-                    <view class="hot-item3" wx:if="{{item.room == '38#大'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_s}}" wx:key="key" bindtap="Tapiteminfo"
+                    <view class="hot-item3" wx:if="{{item.room == '38楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_s}}" wx:key="key" bindtap="Tapiteminfo"
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
                         <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>
@@ -70,7 +70,7 @@
       <van-col span="5" class="conference4">
             <view class="discovermain">
                 <view class="hot">
-                    <view class="hot-item4" wx:if="{{item.room == '上海#大'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
+                    <view class="hot-item4" wx:if="{{item.room == '大会议室（上海）'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
                     style="height:{{item.length}};margin-top: {{item.m_top}};">
                         <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.title}}</view>
                         <view class="itempeople">{{item.people}}</view>

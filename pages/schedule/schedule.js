@@ -65,8 +65,12 @@ Page({
   },
   onLoad: function (options) {
     for (let index = 0; index < this.data.shceList.length; index++) {
-      this.data.shceList[index].start_time = this.data.shceList[index].s_time.substr(11,12)
+      this.data.shceList[index].start_time = 
+        this.data.shceList[index].s_time.substr(11)
     }
+    this.setData({
+      shceList : this.data.shceList
+    })
     console.log(this.data.shceList);
   },
   onReady: function () {
@@ -128,12 +132,12 @@ Page({
     this.onRequest();
   },
   Tapiteminfo: function(e){
-    console.log(e.currentTarget.dataset.id)
-    var iteminfo_object = this.data.Conference_list.find(item => item.id == e.currentTarget.dataset.id)
-    console.log(iteminfo_object)
-    var str= JSON.stringify(iteminfo_object);
+    // console.log(e.currentTarget.dataset.id)
+    // var iteminfo_object = this.data.Conference_list.find(item => item.id == e.currentTarget.dataset.id)
+    // console.log(iteminfo_object)
+    // var str= JSON.stringify(iteminfo_object);
     wx.navigateTo({
-        url: '../info/info?str='+ str ,
+        url: '../info/info' ,
       })
   },
 })

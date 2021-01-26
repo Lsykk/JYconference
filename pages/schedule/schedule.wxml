@@ -9,7 +9,7 @@
     <view>
       <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo" >
         <view class="sche_time">
-          <text>{{item.s_time}}</text>
+          <text>{{item.start_time}}</text>
         </view>
         <view class="sche_main">
           <text>{{item.name}}</text>
