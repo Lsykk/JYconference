@@ -110,28 +110,28 @@ height:23px;
 margin-left: 100px;
 }
 .hot-item1 {
-  background-color: #FFDB5C;
+  /* background-color: #FFDB5C; */
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
   /* margin-top: 100%; */
 }
 .hot-item2 {
-  background-color: #FF9F7F;
+  /* background-color: #FF9F7F; */
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
   /* margin-top: 100%; */
 }
 .hot-item3 {
-  background-color: #9FE6B8;
+  /* background-color: #9FE6B8; */
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
   /* margin-top: 100%; */
 }
 .hot-item4 {
-  background-color: #D2CEF7;
+  /* background-color: #D2CEF7; */
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;

@@ -22,9 +22,10 @@
     <image src="/image/attendee.png"></image>
     <text>参会人: </text>
   </van-row>
-  <van-row span="8">
+  <van-row class="view_attendee">
    <view class="other">
-      <text>{{confo_info.attendee}}</text>
+      <!-- <text>{{confo_info.attendee}}</text> -->
+      <view style="margin-bottom: 50rpx;">{{confo_info.attendee}}</view>
    </view>
   </van-row>
   <van-row span="8">

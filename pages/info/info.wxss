@@ -34,3 +34,7 @@
 .other {
   line-height:55rpx;
 }
+
+.view_attendee .van-row {
+  height: auto;
+}

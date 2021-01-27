@@ -116,6 +116,7 @@ Page({
         }
         else {
           console.log("登录失败");
+          Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
           // wx.reLaunch({
           //   url:'../main/main?username='+_that.data.username
           // })
