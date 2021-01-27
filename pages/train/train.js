@@ -11,7 +11,14 @@ Page({
       "#FFECA5",
       "#FFCFBE",
       "#CBF8DB",
-      "#D2CEF7"
+      "#D2CEF7",
+      "#99DBFE",
+      "#F4D5F4",
+      "#FFDB5C",
+      "#9FE6B8",
+      "#FFA5BB",
+      "#E7BCF3",
+      "#D8DBDA"
     ],
     selectWeek:0,
     timeBean:{},
@@ -110,12 +117,12 @@ Page({
         'content-type': 'text/plain'
       },
       success (res) {
-        console.log("获取token成功");
+        // console.log("获取token成功");
         console.log("获取到的token" + res.data.token);
         _that.setData({
           user_token : res.data.token
         })
-        console.log("切换日期拿到新的token："+ _that.data.user_token);
+        // console.log("切换日期拿到新的token："+ _that.data.user_token);
         _that.onGetConfList();
       },
       fail (res) {
@@ -125,7 +132,7 @@ Page({
     })
   },
   onGetConfList: function() {
-    console.log("开始获取会议室列表")
+    console.log("开始获取培训会议室列表")
     //获取会议室信息
     const param2 = {
       token: this.data.user_token,
@@ -150,7 +157,7 @@ Page({
         },
         success (res) {
           console.log("获取培训会议室信息成功");
-          console.log("获取到的会议室信息是：");
+          console.log("获取到的培训会议室列表是：");
           console.log(res.data.data)
           _that.setData({
             Conference_list : res.data.data
@@ -158,7 +165,7 @@ Page({
           _that.onListDeal();
         },
         fail (res) {
-          console.log("获取会议室信息失败");
+          console.log("获取培训会议室信息失败");
           console.log(res.data);
         }
     })
@@ -189,19 +196,17 @@ Page({
         })
         var length_num =  ((new_e_time_hour * 60 + new_e_time_min ) - (new_s_time_hour * 60 + new_s_time_min ) ) * 2;
         // console.log("length_num等于:" + length_num + "px");
-        console.log(this.data.Conference_list[i].s_time + "对应的高度m_top_num")
-        console.log(((new_s_time_hour * 60 + new_s_time_min ) - 510 )*  2 + "pxxx")
+        // console.log(this.data.Conference_list[i].s_time + "对应的高度m_top_num")
+        // console.log(((new_s_time_hour * 60 + new_s_time_min ) - 510 )*  2 + "pxxx")
         var m_top_num =  ((new_s_time_hour * 60 + new_s_time_min ) - 510 ) * 1.9815;
         // console.log("m_top_num等于:" + m_top_num + "px");
-
         var titlem_top_num = length_num * 0.4;
         // console.log("titlem_top_num等于:" + titlem_top_num + "px");
-
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
         var idd = i.toString();
-        var bgc = this.data.colorList[ i % 4 ] ;
+        var bgc = this.data.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
@@ -216,7 +221,7 @@ Page({
         });
         // console.log(this.data.Conference_list[i])
       }
-      console.log("本地的Conference_list数据是：");
+      console.log("本地的培训会议列表数据是：");
       console.log(this.data.Conference_list);
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         if ( this.data.Conference_list[i].room == '30楼大会议室')
@@ -259,9 +264,9 @@ Page({
     let yy = new Date(event.detail).getFullYear();
     let mm = new Date(event.detail).getMonth()+1;
     let dd = new Date(event.detail).getDate();
-    console.log(yy,mm,dd);
+    // console.log(yy,mm,dd);
     let datestring = yy + "年" + mm + "月" + dd + "日" ;
-    console.log(datestring);
+    // console.log(datestring);
     this.setData({
       show: false,
       date: datestring,
@@ -301,7 +306,7 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
   //下一周
@@ -328,7 +333,7 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
   //切换日期

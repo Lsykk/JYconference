@@ -10,7 +10,14 @@ Page({
       "#FFECA5",
       "#FFCFBE",
       "#CBF8DB",
-      "#D2CEF7"
+      "#D2CEF7",
+      "#99DBFE",
+      "#F4D5F4",
+      "#FFDB5C",
+      "#9FE6B8",
+      "#FFA5BB",
+      "#E7BCF3",
+      "#D8DBDA"
     ],
     selectWeek:0,
     timeBean:{},
@@ -90,7 +97,7 @@ Page({
       nowdate: nowdate_deal,
       secstr: secstr 
     }
-    console.log(param1);
+    // console.log(param1);
     const paramstring = JSON.stringify(param1) ;
     // console.log(paramstring);
     this.setData({
@@ -114,7 +121,7 @@ Page({
         _that.setData({
           user_token : res.data.token
         })
-        console.log("切换日期拿到新的token："+ _that.data.user_token);
+        // console.log("切换日期拿到新的token："+ _that.data.user_token);
         _that.onGetConfList();
       },
       fail (res) {
@@ -163,66 +170,6 @@ Page({
     })
   },
   onListDeal:function() {
-      //  let datas = [
-      // {
-      //     attendee: ["王籽言", "郑薇"],
-      //     end_time: "2021-01-27 15:30",
-      //     id: "0",
-      //     length: "",
-      //     m_top: "",
-      //     name: "面试",
-      //     other: "面试",
-      //     people: "王籽言",
-      //     room: "30楼小会议室",
-      //     start_time: "2021-01-27 14:00",
-      //     title: "面试",
-      //     titlem_top: ""
-      //   },
-      //   {
-      //     attendee: ["王籽言", "郑薇"],
-      //     end_time: "2021-01-27 17:30",
-      //     id: "1",
-      //     length: "",
-      //     m_top: "",
-      //     name: "面试",
-      //     other: "面试",
-      //     people: "王籽言",
-      //     room: "30楼小会议室",
-      //     start_time: "2021-01-27 16:30",
-      //     title: "面试",
-      //     titlem_top: ""
-      //   },
-      //   {
-      //     attendee: ["王籽言", "郑薇"],
-      //     end_time: "2021-01-27 10:30",
-      //     id: "2",
-      //     length: "",
-      //     m_top: "",
-      //     name: "面试",
-      //     other: "人力终面",
-      //     people: "王籽言",
-      //     room: "30楼小会议室",
-      //     start_time: "2021-01-27 09:30",
-      //     title: "面试",
-      //     titlem_top: ""
-      //   },{
-      //     attendee: ["王籽言"],
-      //     end_time: "2021-01-27 19:30",
-      //     id: "3",
-      //     length: "",
-      //     m_top: "",
-      //     name: "期权培训",
-      //     other: "培训",
-      //     people: "王籽言",
-      //     room: "30楼大会议室",
-      //     start_time: "2021-01-27 17:30",
-      //     title: "期权培训",
-      //     titlem_top: "",
-      //   }
-      // ];
-      // this.setData({
-      //   Conference_list : datas
-      // })
       // console.log(this.data.Conference_list)
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         var new_s_time = this.data.Conference_list[i].start_time.substr(11,15)
@@ -257,27 +204,11 @@ Page({
         var titlem_top_num = length_num * 0.3;
         // console.log("titlem_top_num等于:" + titlem_top_num + "px");
 
-        
-
-        // var chuo_s = new Date(this.data.Conference_list[i].start_time.replace(/-/g,"/")).getTime()
-        // var chuo_e = new Date(this.data.Conference_list[i].end_time.replace(/-/g,"/")).getTime()
-        // var length_num = (chuo_e - chuo_s) / 30000 ;
-        // var length_num = (chuo_e - chuo_s)  ;
-        // console.log("length_num等于:" + length_num)
-        // var m_top_num = (chuo_s - 1611189000000 )/ 324000 * 2.6 ;
-        // var m_top_num = chuo_s /100000 ;
-        // var titlem_top_num = length_num * 0.4;
-        // if ( length_num <= 100) {
-        //   titlem_top_num =  length_num * 0.2;
-        // }
-        // if ( length_num <= 60) {
-        //   titlem_top_num =  length_num * 0.1;
-        // }
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
         var idd = i.toString();
-        var bgc = this.data.colorList[ i % 4 ] ;
+        var bgc = this.data.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
@@ -293,40 +224,6 @@ Page({
         // console.log(this.data.Conference_list[i])
 
       }
-
-
-      // for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
-      //   var chuo_s = new Date(this.data.Conference_list[i].start_time.replace(/-/g,"/")).getTime()
-      //   var chuo_e = new Date(this.data.Conference_list[i].end_time.replace(/-/g,"/")).getTime()
-      //   var length_num = (chuo_e - chuo_s) / 30000 ;
-      //   var length_num = (chuo_e - chuo_s) / 30000 ;
-      //   console.log( "一天的长度：") ;
-      //   console.log( chuo_e - chuo_s ) ;
-      //   var m_top_num = (chuo_s / ( chuo_e - chuo_s )/ 10000 * 5.5 );
-      //   console.log(m_top_num);
-      //   var titlem_top_num = length_num * 0.4;
-      //   if ( length_num <= 100) {
-      //     titlem_top_num =  length_num * 0.2;
-      //   }
-      //   if ( length_num <= 60) {
-      //     titlem_top_num =  length_num * 0.1;
-      //   }
-      //   var length_string = length_num.toString()+"px";
-      //   var m_top_string = m_top_num.toString() + "%";
-      //   var titlem_top_string = titlem_top_num.toString() + "px";
-      //   var idd = i.toString();
-      //   const state1 = "Conference_list["+ i +"].length"
-      //   const state2 = "Conference_list["+ i +"].m_top"
-      //   const state3 = "Conference_list["+ i +"].titlem_top"
-      //   const state4 = "Conference_list["+ i +"].id"
-      //   this.setData({
-      //     [state2]: m_top_string,
-      //     [state1]: length_string,
-      //     [state3]: titlem_top_string,
-      //     [state4]: idd
-      //   });
-      // }
-      // console.log("Conference_list:");
       console.log("本地的Conference_list数据是：");
       console.log(this.data.Conference_list);
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
@@ -412,7 +309,7 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
   //下一周
@@ -439,7 +336,7 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
   //切换日期
