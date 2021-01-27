@@ -5,16 +5,38 @@
   </view>
   <!-- 列表 -->
   <view>
-    <view class="time">上午</view>
-    <view>
-      <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo" >
-        <view class="sche_time">
-          <text>{{item.start_time}}</text>
-        </view>
-        <view class="sche_main">
-          <text>{{item.name}}</text>
+    <view class="time" wx:if="{{morning}}">上午</view>
+      <view>
+        <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo" >
+          <view class="sche_time" wx:if="{{ item.shijianduan < 720 }}" >
+            <text style="letter-spacing: 9rpx;">{{item.s_time}}</text>
+          </view>
+          <view class="sche_main" style="background-color: {{item.bg_color}};" wx:if="{{ item.shijianduan < 720 }}">
+            <text>{{item.name}}</text>
+          </view>
         </view>
       </view>
-    </view>
+    <view class="time" wx:if="{{afternoon}}">下午</view>
+      <view>
+        <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo">
+          <view class="sche_time" wx:if="{{ item.shijianduan >= 720 && item.shijianduan < 1050 }}">
+            <text style="letter-spacing: 9rpx;">{{item.s_time}}</text>
+          </view>
+          <view class="sche_main" style="background-color: {{item.bg_color}};" wx:if="{{ item.shijianduan >= 720 && item.shijianduan < 1050 }}">
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    <view class="time" wx:if="{{evening}}">晚上</view>
+      <view>
+        <view wx:for="{{shceList}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo" >
+          <view class="sche_time" wx:if="{{ item.shijianduan >= 1050 }}">
+            <text style="letter-spacing: 9rpx;">{{item.s_time}}</text>
+          </view>
+          <view class="sche_main" style="background-color: {{item.bg_color}};" wx:if="{{ item.shijianduan >= 1050 }}">
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
   </view>
 </scorll-view>

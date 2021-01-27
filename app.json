@@ -1,13 +1,10 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/main/main",
-    
     "pages/schedule/schedule",
     
-    
+    "pages/main/main",
     "pages/info/info",
-    
     "pages/schedule_info/schedule_info",
     "pages/train/train",
     "pages/train_info/train_info"

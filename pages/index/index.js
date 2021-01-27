@@ -108,6 +108,7 @@ Page({
       },
       success (res) {
         console.log(res.data)
+        app.globalData.uid = res.data.msg ;
         if ( ! res.data.ret ) {
           console.log("登录成功")
           Toast.success('登录成功!');

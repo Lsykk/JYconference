@@ -1,1 +1,31 @@
-<view>行程详情</view>
+<view class="title">
+  <text>行程 | {{confo_info.name}}</text>
+</view>
+<view class="infomation">
+  <van-row span="8">
+    <image src="/image/s_time.png"></image>
+    <text>开始: {{confo_info.s_time}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/e_time.png"></image>
+    <text>结束: {{confo_info.e_time}}</text>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/people.png"></image>
+    <text>接收人: </text>
+  </van-row>
+   <van-row span="8">
+   <view class="other">
+      <text>{{confo_info.people}}</text>
+   </view>
+  </van-row>
+  <van-row span="8">
+    <image src="/image/word.png"></image>
+    <text>会议说明: </text>
+  </van-row>
+  <van-row span="8">
+   <view class="other">
+      <text>{{confo_info.other}}</text>
+   </view>
+  </van-row>
+</view>

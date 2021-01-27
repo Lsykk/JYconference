@@ -1,6 +1,7 @@
 .time {
   display: block;
-  padding: 35rpx;
+  padding-top: 50rpx;
+  padding-left: 50rpx;  
   font-size: 35rpx;
   /* font-weight: bold; */
 }
@@ -18,11 +19,11 @@
   /* font-weight: bold; */
 }
 .sche_main {
-  width: 80%;
+  width: 76%;
   height: 110rpx;
   margin-top: 20px;
   background-color: #D8F4E6;
-  margin-left: 20%;
+  margin-left: 24%;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
 }

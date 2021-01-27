@@ -196,12 +196,12 @@ Page({
         })
         var length_num =  ((new_e_time_hour * 60 + new_e_time_min ) - (new_s_time_hour * 60 + new_s_time_min ) ) * 2;
         // console.log("length_num等于:" + length_num + "px");
-        console.log(this.data.Conference_list[i].s_time + "对应的高度m_top_num")
-        console.log(((new_s_time_hour * 60 + new_s_time_min ) - 510 )*  2 + "pxxx")
+        // console.log(this.data.Conference_list[i].s_time + "对应的高度m_top_num")
+        // console.log(((new_s_time_hour * 60 + new_s_time_min ) - 510 )*  2 + "pxxx")
         var m_top_num =  ((new_s_time_hour * 60 + new_s_time_min ) - 510 ) * 1.9815;
         // console.log("m_top_num等于:" + m_top_num + "px");
 
-        var titlem_top_num = length_num * 0.3;
+        var titlem_top_num = length_num * 0.25;
         // console.log("titlem_top_num等于:" + titlem_top_num + "px");
 
         var length_string = length_num.toString()+"px";
@@ -214,12 +214,14 @@ Page({
         const state3 = "Conference_list["+ i +"].titlem_top"
         const state4 = "Conference_list["+ i +"].id"
         const state5 = "Conference_list["+ i +"].bg_color"
+        const state6 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
           [state4]: idd,
-          [state5]: bgc
+          [state5]: bgc,
+          [state6]: length_num
         });
         // console.log(this.data.Conference_list[i])
 
@@ -306,10 +308,18 @@ Page({
           [state1]: change_month
         });
     }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
+        });
+    }
+    console.log()
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    // console.log(this.data.Request_date);
+    console.log(this.data.Request_date);
     this.onRequest();
   },
   //下一周
@@ -333,10 +343,17 @@ Page({
           [state1]: change_month
         });
     }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    // console.log(this.data.Request_date);
+    console.log(this.data.Request_date);
     this.onRequest();
   },
   //切换日期
@@ -355,6 +372,13 @@ Page({
       const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
         this.setData({
           [state1]: change_month
+        });
+    }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
         });
     }
     this.setData({

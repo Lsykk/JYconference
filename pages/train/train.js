@@ -212,12 +212,14 @@ Page({
         const state3 = "Conference_list["+ i +"].titlem_top"
         const state4 = "Conference_list["+ i +"].id"
         const state5 = "Conference_list["+ i +"].bg_color"
+        const state6 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
           [state4]: idd,
-          [state5]: bgc
+          [state5]: bgc,
+          [state6]: length_num
         });
         // console.log(this.data.Conference_list[i])
       }
@@ -303,6 +305,13 @@ Page({
           [state1]: change_month
         });
     }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
@@ -330,6 +339,13 @@ Page({
           [state1]: change_month
         });
     }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
@@ -348,6 +364,13 @@ Page({
       const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
         this.setData({
           [state1]: change_month
+        });
+    }
+    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+        this.setData({
+          [state2]: change_day
         });
     }
     this.setData({
