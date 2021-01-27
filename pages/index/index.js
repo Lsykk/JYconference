@@ -84,6 +84,7 @@ Page({
   Login_second() {
     const darkpassword = md5.hexMD5(this.data.password);
     console.log(darkpassword);
+    app.globalData.login = this.data.username ;
     const param = {
       login: this.data.username,
       userpassword: darkpassword,

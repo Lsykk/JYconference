@@ -1,1 +1,40 @@
-/* pages/train_info/train_info.wxss */
+.title {
+  height: 150rpx;
+  /* background-color: bisque; */
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow:0px 8px 32px rgba(0,0,0,.1)
+}
+.title text {
+  font-size: 45rpx;
+  display: block;
+  padding: 25px 20px;
+  letter-spacing: 5rpx;
+  font-weight: 550;
+}
+.infomation {
+  /* height: 200rpx; */
+  margin-top: 50rpx;
+}
+.infomation .van-row {
+  height: 100rpx;
+  margin: 30rpx 70rpx;
+  font-size: 35rpx;
+}
+.infomation image {
+  display: block;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-right: 20px;
+}
+.infomation text {
+  letter-spacing: 3rpx;
+}
+.other {
+  line-height:55rpx;
+}
+
+.view_attendee .van-row {
+  height: auto;
+}

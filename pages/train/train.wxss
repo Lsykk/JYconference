@@ -1,1 +1,169 @@
-/* pages/train/train.wxss */
+.calendar_main {
+  height: 120rpx;
+}
+.itemtitle {
+  margin-top: 10px;
+  color: rgb(70, 68, 68);
+  font-size: 15px;
+  font-weight: bold;
+}
+.itempeople {
+  margin-top: 5px;
+  color: rgb(46, 43, 43);
+  /* font-size: 20px; */
+}
+.van-cell__value {
+  font-size: 18px;
+  color: black!important;
+}
+.van-col--4 {
+  text-align: center;
+  height: 80rpx;
+}
+.van-col--5 {
+  text-align: center;
+  /* height: 80rpx; */
+  /* border-radius: 20rpx; */
+  margin-bottom: 10rpx;
+}
+.van-col--5 text {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.room1 .van-col--5{
+  height: 80rpx;
+  background-color: #FFECA5;
+}
+.room2 .van-col--5{
+  height: 80rpx;
+  background-color: #FFCFBE;
+}
+.room3 .van-col--5{
+  height: 80rpx;
+  background-color: #CBF8DB;
+}
+.room4 .van-col--5{
+  height: 80rpx;
+  background-color: #D2CEF7;
+}
+
+.conference1 .van-col--5 {
+  height: 2800rpx;
+  border-left: 1px solid rgb(240, 240, 240);
+  /* background-color: #D1ECFF; */
+}
+.conference2 .van-col--5 {
+  height: 2800rpx;
+  border-left: 1px solid rgb(240, 240, 240);
+  /* background-color: #D8F4E6; */
+}
+.conference3 .van-col--5 {
+  height: 2800rpx;
+  border-left: 1px solid rgb(240, 240, 240);
+  /* background-color: #FDF2D9; */
+}
+.conference4 .van-col--5 {
+  height: 2800rpx;
+  border-left: 1px solid rgb(240, 240, 240);
+  /* background-color: #FFC9CE; */
+}
+
+.weui-cell-third{
+  background: #fff;
+}
+.weui-cell-list{
+  background: #fff;
+  margin: 5px 10px 5px 10px;
+}
+.weui-cell-line{
+/* width: 100px; */
+  margin-left: 5px;
+  border-left: 1px solid #ddd;
+  height: 100px; 
+  background: #fff
+}
+.weui-cell-circle{
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 10px;
+  height: 10px;
+  border-color: #FFCD36;
+}
+.weui-cell-time{
+  width: 40px;
+  float: left;
+  font-size: 14px;
+  padding-left: 8px;
+  /* width: 72px; */
+  color: #AFB1B6;
+  margin-top: -15px;
+}
+.weui-cell-event{
+ 
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.weui-cell-name{
+font-size:14px;
+height:23px;
+margin-left: 100px;
+}
+.hot-item1 {
+  /* background-color: #FFDB5C; */
+  border-radius: 20rpx;
+  position: absolute;
+  width: 20.83333333%;
+  /* margin-top: 100%; */
+}
+.hot-item2 {
+  /* background-color: #FF9F7F; */
+  border-radius: 20rpx;
+  position: absolute;
+  width: 20.83333333%;
+  /* margin-top: 100%; */
+}
+.hot-item3 {
+  /* background-color: #9FE6B8; */
+  border-radius: 20rpx;
+  position: absolute;
+  width: 20.83333333%;
+  /* margin-top: 100%; */
+}
+.hot-item4 {
+  /* background-color: #D2CEF7; */
+  border-radius: 20rpx;
+  position: absolute;
+  width: 20.83333333%;
+  /* margin-top: 100%; */
+}
+.calendar_main image {
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 20px;
+  margin-left: 25rpx;
+  margin-top: 25rpx;
+}
+.calendar_main van-cell {
+  display: block;
+  /* width: 100px; */
+  height: 25px;
+  float: left;
+  margin-top: 30rpx;
+  margin-left: 20px
+}
+
+.selectdate {
+  display: block;
+  padding-top: 30rpx;
+  float: right;
+  padding-right: 50rpx;
+}
+.selectdate button {
+  height: 70rpx;
+}
+.main {
+  margin-top: 20rpx;
+}

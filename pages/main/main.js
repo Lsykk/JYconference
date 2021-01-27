@@ -254,7 +254,7 @@ Page({
         var m_top_num =  ((new_s_time_hour * 60 + new_s_time_min ) - 510 ) * 1.9815;
         // console.log("m_top_num等于:" + m_top_num + "px");
 
-        var titlem_top_num = length_num * 0.4;
+        var titlem_top_num = length_num * 0.3;
         // console.log("titlem_top_num等于:" + titlem_top_num + "px");
 
         
@@ -402,6 +402,13 @@ Page({
     });
     // console.log(this.data.timeBean);
     // console.log(this.data.selectWeek);
+    if( this.data.timeBean.yearMonth.length < 7){
+      const state1 = "timeBean.yearMonth";
+      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
+        this.setData({
+          [state1]: change_month
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
@@ -422,6 +429,13 @@ Page({
     })
     // console.log(this.data.timeBean);
     // console.log(this.data.selectWeek);
+    if( this.data.timeBean.yearMonth.length < 7){
+      const state1 = "timeBean.yearMonth";
+      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
+        this.setData({
+          [state1]: change_month
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
