@@ -106,19 +106,22 @@ Page({
         'content-type': 'text/plain'
       },
       success (res) {
-        console.log("登录成功")
-        console.log(res)
-        Toast.success('登录成功!');
-        // var username= _that.data.username;
-        // wx.navigateTo({
-        //   url: '../main/main?username='+ username ,
-        // })
-        wx.reLaunch({
-          url:'../main/main?username='+_that.data.username
-        })
+        console.log(res.data)
+        if ( ! res.data.ret ) {
+          console.log("登录成功")
+          Toast.success('登录成功!');
+          wx.reLaunch({
+            url:'../main/main?username='+_that.data.username
+          })
+        }
+        else {
+          console.log("登录失败");
+          // wx.reLaunch({
+          //   url:'../main/main?username='+_that.data.username
+          // })
+        }        
       },
       fail (res) {
-        console.log("登录失败");
         console.log(res.data)
       }
     })

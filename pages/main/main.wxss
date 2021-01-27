@@ -33,19 +33,19 @@
 }
 .room1 .van-col--5{
   height: 80rpx;
-  background-color: rgb(255, 236, 165);
+  background-color: #FFECA5;
 }
 .room2 .van-col--5{
   height: 80rpx;
-  background-color: rgb(255, 207, 190);
+  background-color: #FFCFBE;
 }
 .room3 .van-col--5{
   height: 80rpx;
-  background-color: rgb(203, 248, 219);
+  background-color: #CBF8DB;
 }
 .room4 .van-col--5{
   height: 80rpx;
-  background-color: rgb(210, 206, 247);
+  background-color: #D2CEF7;
 }
 
 .conference1 .van-col--5 {
@@ -114,28 +114,28 @@ margin-left: 100px;
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
-  margin-top: 100%;
+  /* margin-top: 100%; */
 }
 .hot-item2 {
   background-color: #FF9F7F;
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
-  margin-top: 100%;
+  /* margin-top: 100%; */
 }
 .hot-item3 {
   background-color: #9FE6B8;
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
-  margin-top: 100%;
+  /* margin-top: 100%; */
 }
 .hot-item4 {
-  background-color: rgb(154, 143, 252);
+  background-color: #D2CEF7;
   border-radius: 20rpx;
   position: absolute;
   width: 20.83333333%;
-  margin-top: 100%;
+  /* margin-top: 100%; */
 }
 .calendar_main image {
   display: block;

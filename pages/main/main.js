@@ -6,6 +6,12 @@ import md5 from "../../utils/MD5";
 
 Page({
   data: {
+    colorList:[
+      "#FFECA5",
+      "#FFCFBE",
+      "#CBF8DB",
+      "#D2CEF7"
+    ],
     selectWeek:0,
     timeBean:{},
     datastring:'',
@@ -46,13 +52,19 @@ Page({
       },
       {
         time: '17:30'
+      },
+      {
+        time: '18:30'
+      },
+      {
+        time: '19:30'
       }
     ],
     user_token: '',
     username:'',
     Request_date:'',
     Paramstring:'',
-    meetingstring:''
+    Meetingstring:''
   },
   onLoad: function (option) {
     // console.log(option);
@@ -65,6 +77,7 @@ Page({
       Request_date : nowdate_deal
     })
     this.onRequest();
+    // this.onListDeal();
 
   },
   onRequest:function(){
@@ -72,13 +85,13 @@ Page({
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     let secstring = this.data.username + nowdate_deal ;
     const secstr = md5.hexMD5(secstring);
-    const param = {
+    const param1 = {
       login: this.data.username,
       nowdate: nowdate_deal,
       secstr: secstr 
     }
-    console.log(param);
-    const paramstring = JSON.stringify(param) ;
+    console.log(param1);
+    const paramstring = JSON.stringify(param1) ;
     // console.log(paramstring);
     this.setData({
       Paramstring : paramstring
@@ -101,6 +114,7 @@ Page({
         _that.setData({
           user_token : res.data.token
         })
+        console.log("切换日期拿到新的token："+ _that.data.user_token);
         _that.onGetConfList();
       },
       fail (res) {
@@ -111,92 +125,35 @@ Page({
   },
   onGetConfList: function() {
     console.log("开始获取会议室列表")
-    let datas = [
-      {
-          id:'001',
-          room: "30#大",
-          title: "财务部",
-          name: "财务部年度总结会议",
-          people: "赟总",
-          s_time:"2021-01-21 10:00:00",
-          e_time:"2021-01-21 11:30:00",
-          attendee:['BBB','BBB','BBB','BBB','BBB','BBB'],
-          length:"",
-          m_top:'',
-          titlem_top:''
-        },
-        {
-          id:'001',
-          room: "30#大",
-          title: "财务部",
-          name: "财务部年度总结会议",
-          people: "赟总",
-          s_time:"2021-01-21 10:00:00",
-          e_time:"2021-01-21 11:30:00",
-          attendee:['BBB','BBB','BBB','BBB','BBB','BBB'],
-          length:"",
-          m_top:'',
-          titlem_top:''
-        },
-        {
-          id:'001',
-          room: "30#大",
-          title: "财务部",
-          name: "财务部年度总结会议",
-          people: "赟总",
-          s_time:"2021-01-21 10:00:00",
-          e_time:"2021-01-21 11:30:00",
-          attendee:['BBB','BBB','BBB','BBB','BBB','BBB'],
-          length:"",
-          m_top:'',
-          titlem_top:''
-        }
-      ];
-      console.log("datas:")
-      console.log(datas);
     //获取会议室信息
-    const param = {
+    const param2 = {
       token: this.data.user_token,
       startdate: this.data.Request_date,
       enddate: this.data.Request_date 
     }
-    console.log(param);
-    const meetingstring = JSON.stringify(param) ;
+    console.log(param2);
+    const meetingstring = JSON.stringify(param2) ;
     // console.log(paramstring);
     this.setData({
-      meetingstring : meetingstring
+      Meetingstring : meetingstring
     })
     let _that = this;
     wx.request({
-        url: 'http://118.31.73.43:9389/wuchan/weixin/meeting.jsp'+ '?'+'meeting=' + _that.data.meetingstring,
+        url: 'http://118.31.73.43:9389/wuchan/weixin/meeting.jsp'+ '?'+'meeting=' + _that.data.Meetingstring,
         method: "post",
         data: {
-          "meeting" : _that.data.meetingstring
+          "meeting" : _that.data.Meetingstring
         },
         header: {
           'content-type': 'text/plain'
         },
         success (res) {
           console.log("获取会议室信息成功");
+          console.log("获取到的会议室信息是：");
           console.log(res.data.data)
           _that.setData({
             Conference_list : res.data.data
           })
-          // for ( var i = 0 ; i < res.data.data.length ; i++ ) {
-          //   const state1 = "Conference_list["+ i +"].title"
-          //   const state2 = "Conference_list["+ i +"].name"
-          //   const state3 = "Conference_list["+ i +"].start_time"
-          //   const state4 = "Conference_list["+ i +"].end_time"
-          //   const state5 = "Conference_list["+ i +"].people"
-          //   const state6 = "Conference_list["+ i +"].attendee"
-          //   const state7 = "Conference_list["+ i +"].room"
-          //   const state8 = "Conference_list["+ i +"].other"
-          //   this.setData({
-          //     [state1]: m_top_string,
-          //     [state2]: length_string,
-          //     [state3]: titlem_top_string
-          //   });
-          // }
           _that.onListDeal();
         },
         fail (res) {
@@ -206,31 +163,118 @@ Page({
     })
   },
   onListDeal:function() {
-      
+      //  let datas = [
+      // {
+      //     attendee: ["王籽言", "郑薇"],
+      //     end_time: "2021-01-27 15:30",
+      //     id: "0",
+      //     length: "",
+      //     m_top: "",
+      //     name: "面试",
+      //     other: "面试",
+      //     people: "王籽言",
+      //     room: "30楼小会议室",
+      //     start_time: "2021-01-27 14:00",
+      //     title: "面试",
+      //     titlem_top: ""
+      //   },
+      //   {
+      //     attendee: ["王籽言", "郑薇"],
+      //     end_time: "2021-01-27 17:30",
+      //     id: "1",
+      //     length: "",
+      //     m_top: "",
+      //     name: "面试",
+      //     other: "面试",
+      //     people: "王籽言",
+      //     room: "30楼小会议室",
+      //     start_time: "2021-01-27 16:30",
+      //     title: "面试",
+      //     titlem_top: ""
+      //   },
+      //   {
+      //     attendee: ["王籽言", "郑薇"],
+      //     end_time: "2021-01-27 10:30",
+      //     id: "2",
+      //     length: "",
+      //     m_top: "",
+      //     name: "面试",
+      //     other: "人力终面",
+      //     people: "王籽言",
+      //     room: "30楼小会议室",
+      //     start_time: "2021-01-27 09:30",
+      //     title: "面试",
+      //     titlem_top: ""
+      //   },{
+      //     attendee: ["王籽言"],
+      //     end_time: "2021-01-27 19:30",
+      //     id: "3",
+      //     length: "",
+      //     m_top: "",
+      //     name: "期权培训",
+      //     other: "培训",
+      //     people: "王籽言",
+      //     room: "30楼大会议室",
+      //     start_time: "2021-01-27 17:30",
+      //     title: "期权培训",
+      //     titlem_top: "",
+      //   }
+      // ];
+      // this.setData({
+      //   Conference_list : datas
+      // })
+      // console.log(this.data.Conference_list)
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
-        var new_s_time = this.data.Conference_list[i].start_time + ":00"
-        var new_e_time = this.data.Conference_list[i].end_time + ":00"
-        const s = "Conference_list["+ i +"].start_time"
-        const e = "Conference_list["+ i +"].end_time"
+        var new_s_time = this.data.Conference_list[i].start_time.substr(11,15)
+        var new_s_time_hour = new_s_time.substr(0,2);
+        var new_s_time_min = new_s_time.substr(3,4);
+        new_s_time_hour *= 1 ;
+        new_s_time_min *= 1 ;
+        // console.log("开始时：" + new_s_time_hour);
+        // console.log("开始分：" + new_s_time_min);
+        var new_e_time = this.data.Conference_list[i].end_time.substr(11,15)
+        var new_e_time_hour = new_e_time.substr(0,2);
+        var new_e_time_min = new_e_time.substr(3,4);
+        new_e_time_hour *= 1 ;
+        new_e_time_min *= 1 ;
+        // console.log("结束时：" + new_e_time_hour);
+        // console.log("结束分：" + new_e_time_min);
+        // const s = "Conference_list["+ i +"].start_time"
+        // const e = "Conference_list["+ i +"].end_time"
+        const s_hm = "Conference_list["+ i +"].s_time"
+        const e_hm = "Conference_list["+ i +"].e_time"
         this.setData({
-          [s] : new_s_time,
-          [e] : new_e_time
+          [s_hm] : new_s_time,
+          [e_hm] : new_e_time,
         })
-        console.log(this.data.Conference_list[i])
-        var chuo_s = new Date(this.data.Conference_list[i].start_time.replace(/-/g,"/")).getTime()
-        var chuo_e = new Date(this.data.Conference_list[i].end_time.replace(/-/g,"/")).getTime()
-        var length_num = (chuo_e - chuo_s) / 30000 ;
-        var length_num = (chuo_e - chuo_s) / 30000 ;
-        var m_top_num = (chuo_s - 1611189000000 )/ 324000 * 2.6 ;
+        var length_num =  ((new_e_time_hour * 60 + new_e_time_min ) - (new_s_time_hour * 60 + new_s_time_min ) ) * 2;
+        // console.log("length_num等于:" + length_num + "px");
+        console.log(this.data.Conference_list[i].s_time + "对应的高度m_top_num")
+        console.log(((new_s_time_hour * 60 + new_s_time_min ) - 510 )*  2 + "pxxx")
+        var m_top_num =  ((new_s_time_hour * 60 + new_s_time_min ) - 510 ) * 1.9815;
+        // console.log("m_top_num等于:" + m_top_num + "px");
+
         var titlem_top_num = length_num * 0.4;
-        if ( length_num <= 100) {
-          titlem_top_num =  length_num * 0.2;
-        }
-        if ( length_num <= 60) {
-          titlem_top_num =  length_num * 0.1;
-        }
+        // console.log("titlem_top_num等于:" + titlem_top_num + "px");
+
+        
+
+        // var chuo_s = new Date(this.data.Conference_list[i].start_time.replace(/-/g,"/")).getTime()
+        // var chuo_e = new Date(this.data.Conference_list[i].end_time.replace(/-/g,"/")).getTime()
+        // var length_num = (chuo_e - chuo_s) / 30000 ;
+        // var length_num = (chuo_e - chuo_s)  ;
+        // console.log("length_num等于:" + length_num)
+        // var m_top_num = (chuo_s - 1611189000000 )/ 324000 * 2.6 ;
+        // var m_top_num = chuo_s /100000 ;
+        // var titlem_top_num = length_num * 0.4;
+        // if ( length_num <= 100) {
+        //   titlem_top_num =  length_num * 0.2;
+        // }
+        // if ( length_num <= 60) {
+        //   titlem_top_num =  length_num * 0.1;
+        // }
         var length_string = length_num.toString()+"px";
-        var m_top_string = m_top_num.toString() + "%";
+        var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
         var idd = i.toString();
         const state1 = "Conference_list["+ i +"].length"
@@ -243,7 +287,11 @@ Page({
           [state3]: titlem_top_string,
           [state4]: idd
         });
+        // console.log(this.data.Conference_list[i])
+
       }
+
+
       // for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
       //   var chuo_s = new Date(this.data.Conference_list[i].start_time.replace(/-/g,"/")).getTime()
       //   var chuo_e = new Date(this.data.Conference_list[i].end_time.replace(/-/g,"/")).getTime()
@@ -275,7 +323,8 @@ Page({
       //     [state4]: idd
       //   });
       // }
-      console.log("Conference_list:");
+      // console.log("Conference_list:");
+      console.log("本地的Conference_list数据是：");
       console.log(this.data.Conference_list);
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         if ( this.data.Conference_list[i].room == '30楼大会议室')
@@ -293,7 +342,7 @@ Page({
         thirty_eight_s : this.data.Conference_list,
         shanghai_b : this.data.Conference_list
       });
-      console.log(this.data.thirty_b);
+      // console.log(this.data.thirty_b);
       // console.log(this.data.thirty_s);
       // console.log(this.data.thirty_eight_s);
       // console.log(this.data.shanghai_b);
@@ -328,9 +377,9 @@ Page({
   },
   //查看会议详情
   Tapiteminfo: function(e){
-    console.log(e.currentTarget.dataset.id)
+    // console.log(e.currentTarget.dataset.id)
     var iteminfo_object = this.data.Conference_list.find(item => item.id == e.currentTarget.dataset.id)
-    console.log(iteminfo_object)
+    // console.log(iteminfo_object)
     var str= JSON.stringify(iteminfo_object);
     wx.navigateTo({
         url: '../info/info?str='+ str ,
@@ -386,11 +435,18 @@ Page({
     // console.log(e)
     // console.log(this.data.timeBean.yearMonth)
     // console.log(this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)
+    // console.log( this.data.timeBean.yearMonth );
+    if( this.data.timeBean.yearMonth.length < 7){
+      const state1 = "timeBean.yearMonth";
+      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
+        this.setData({
+          [state1]: change_month
+        });
+    }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
-
   }
 })
