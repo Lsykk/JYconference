@@ -2,7 +2,6 @@
   "pages":[
     "pages/index/index",
     "pages/schedule/schedule",
-    
     "pages/main/main",
     "pages/info/info",
     "pages/schedule_info/schedule_info",

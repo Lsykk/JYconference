@@ -7,7 +7,5 @@ Page({
     this.setData({
       confo_info: newdata
     });
-    console.log("即将查询的行程详细信息")
-    console.log(this.data.confo_info)
   }
 })

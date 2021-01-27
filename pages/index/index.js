@@ -1,26 +1,18 @@
 
-let DES3 = require("../../utils/DES3.js");
-let BASE64 = require("../../utils/Base64.js");
 var util = require("../../utils/util");
-// var CryptoJS = require('../../utils/tripledes')
-
-var CryptoJS = require("../../utils/cryptojs");
-
-// var keyHex = CryptoJS.enc.Utf8.parse("A1B2C3D4E5F60708");
 import md5 from "../../utils/MD5";
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 var app = getApp();
-
 Page({
   data: {
     username:'',
     password:'',
-    token:'undefined_token',
+    token:'',
     Paramstring:'',
-    Param_json:'',
     loginstring:''
   },
+  //获取token
   Login_first: function(){
     if ( this.data.username == '' || this.data.password == ''){
       Notify({ type: 'danger', message: '用户名或密码不能为空!' });
@@ -28,32 +20,23 @@ Page({
     }
     else {
       //获取token
-      const key = 'A1B2C3D4E5F60708';
       let login = this.data.username;
       let nowdate = util.formatTime(new Date()) ;
       let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
       let secstring = this.data.username + nowdate_deal ;
-      // login = "ttt"
-      // nowdate_deal = "2021-01-25"
-      // secstring = "ttt2021-01-25" ;
-      console.log(secstring);
       const secstr = md5.hexMD5(secstring);
-      // console.log("MD5:"+secstr)
 
+      //获取token参数准备
       const param = {
         login: login,
         nowdate: nowdate_deal,
         secstr: secstr 
       }
-      console.log(param);
       const paramstring = JSON.stringify(param) ;
-      // console.log(paramstring);
       this.setData({
-        Param_json : param,
         Paramstring : paramstring
       })
-      console.log(this.data.Param_json)
-      console.log("string"+this.data.Paramstring)
+
       //发请求 获取token
       let _that = this;
       wx.request({
@@ -66,8 +49,7 @@ Page({
           'content-type': 'text/plain'
         },
         success (res) {
-          console.log("获取token成功");
-          console.log("获取到的token" + res.data.token);
+          // console.log("获取到的token" + res.data.token);
           _that.setData({
             token : res.data.token
           })
@@ -83,19 +65,19 @@ Page({
   //登录验证
   Login_second() {
     const darkpassword = md5.hexMD5(this.data.password);
-    console.log(darkpassword);
     app.globalData.login = this.data.username ;
+
+    //登录验证参数准备
     const param = {
       login: this.data.username,
       userpassword: darkpassword,
       token: this.data.token 
     }
-    console.log("登录验证的参数token" + param.token);
-    console.log(param);
     const paramstring = JSON.stringify(param) ;
     this.setData({
       loginstring : paramstring
     })
+    //发请求 登录验证
     let _that = this;
     wx.request({
       url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
@@ -107,7 +89,6 @@ Page({
         'content-type': 'text/plain'
       },
       success (res) {
-        console.log(res.data)
         app.globalData.uid = res.data.msg ;
         if ( ! res.data.ret ) {
           console.log("登录成功")
@@ -119,9 +100,6 @@ Page({
         else {
           console.log("登录失败");
           Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
-          // wx.reLaunch({
-          //   url:'../main/main?username='+_that.data.username
-          // })
         }        
       },
       fail (res) {

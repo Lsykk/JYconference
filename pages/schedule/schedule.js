@@ -1,7 +1,5 @@
 var util = require("../../utils/util");
 var utils = require("../../utils/time-utils");
-let BASE64 = require("../../utils/Base64.js");
-let DES3 = require("../../utils/DES3.js");
 import md5 from "../../utils/MD5";
 var app = getApp();
 
@@ -32,15 +30,15 @@ Page({
     Tripstring:'',
     shceList: [],
   },
-  onLoad: function (options) {
+  onLoad: function () {
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     this.setData({
       Request_date : nowdate_deal
     })
-    console.log("页面初始化，Request_date：" + this.data.Request_date);
     this.onRequest();
   },
+  //获取token
   onRequest:function() {
     this.setData({
       morning: true,
@@ -52,18 +50,16 @@ Page({
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     let secstring = app.globalData.login + nowdate_deal ;
     const secstr = md5.hexMD5(secstring);
+    //token参数准备
     const param1 = {
       login: app.globalData.login,
       nowdate: nowdate_deal,
       secstr: secstr 
     }
-    // console.log(param1);
     const paramstring = JSON.stringify(param1) ;
-    // console.log(paramstring);
     this.setData({
       Paramstring : paramstring
     })
-    console.log("string"+this.data.Paramstring)
     //发请求 获取token
     let _that = this;
     wx.request({
@@ -76,37 +72,32 @@ Page({
         'content-type': 'text/plain'
       },
       success (res) {
-        console.log("获取token成功");
-        console.log("获取到的token" + res.data.token);
+        // console.log("获取token成功");
         _that.setData({
           user_token : res.data.token
         })
-        // console.log("切换日期拿到新的token："+ _that.data.user_token);
         _that.onGetScheList();
       },
       fail (res) {
-        console.log("获取token失败");
-        console.log(res)
+        // console.log("获取token失败");
       }
     })
   },
+  //获取行程安排列表
   onGetScheList: function() {
-    console.log("开始获取会议室列表")
-    console.log("userid:" + app.globalData.uid)
-    //获取会议室信息
+    //获取信息
+    //参数准备
     const param2 = {
       token: this.data.user_token,
       userid: app.globalData.uid,
       startdate: this.data.Request_date,
       enddate: this.data.Request_date 
     }
-    console.log(param2);
     const tripstring = JSON.stringify(param2) ;
-    // console.log(paramstring);
-
     this.setData({
       Tripstring : tripstring
     })
+    //发请求
     let _that = this;
     wx.request({
         url: 'http://118.31.73.43:9389/wuchan/weixin/trip.jsp'+ '?'+'trip=' + _that.data.Tripstring,
@@ -118,20 +109,18 @@ Page({
           'content-type': 'text/plain'
         },
         success (res) {
-          console.log("获取行程信息成功");
-          console.log("获取到的行程信息是：");
-          console.log(res.data.data)
+          // console.log("获取行程信息成功");
           _that.setData({
             shceList : res.data.data
           })
           _that.onListDeal();
         },
         fail (res) {
-          console.log("获取行程信息失败");
-          console.log(res.data);
+          // console.log("获取行程信息失败");
         }
     })
   },
+  //行程信息列表 数据处理
   onListDeal:function() {
  //时间处理 提取 时分
     for (let index = 0; index < this.data.shceList.length; index++) {
@@ -139,12 +128,8 @@ Page({
       const new_end_time= this.data.shceList[index].end_time.slice(11,16)
       var new_s_time_hour = new_start_time.substr(0,2);
       var new_s_time_min = new_start_time.substr(3,4);
-      // var new_e_time_hour = new_end_time.substr(0,2);
-      // var new_e_time_min = new_end_time.substr(3,4);
       new_s_time_hour *= 1 ;
       new_s_time_min *= 1 ;
-      // new_e_time_hour *= 1 ;
-      // new_e_time_min *= 1 ;
       const sjd = new_s_time_hour * 60 + new_s_time_min ;
       var idd = index.toString();
       const bgc = this.data.colorList[ index % 11 ] 
@@ -161,7 +146,7 @@ Page({
           [state5]:  sjd
       })
     }
-    console.log(this.data.shceList);
+    //统计上午 下午 晚上 行程个数
     var m = 0 ;
     var a = 0 ;
     var e = 0 ;
@@ -197,6 +182,7 @@ Page({
       timeBean: utils.getWeekDayList(this.data.selectWeek)
     })
   },
+  //上一周
   lastWeek:function(e){   
     var selectWeek = --this.data.selectWeek;
     var timeBean = this.data.timeBean
@@ -208,8 +194,6 @@ Page({
       timeBean,
       selectWeek
     });
-    // console.log(this.data.timeBean);
-    // console.log(this.data.selectWeek);
     if( this.data.timeBean.yearMonth.length < 7){
       const state1 = "timeBean.yearMonth";
       const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
@@ -229,9 +213,10 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
+  //下一周
   nextWeek:function(e){
     var selectWeek = ++this.data.selectWeek;
     var timeBean = this.data.timeBean
@@ -264,18 +249,16 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
+  //切换日期
   dayClick:function(e){
     var timeBean = this.data.timeBean
     timeBean.selectDay = e.detail;
     this.setData({
       timeBean
     })
-    // console.log(e)
-    // console.log(this.data.timeBean.yearMonth)
-    // console.log(this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)
     if( this.data.timeBean.yearMonth.length < 7){
       const state1 = "timeBean.yearMonth";
       const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
@@ -295,12 +278,12 @@ Page({
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
     })
-    console.log(this.data.Request_date);
+    // console.log(this.data.Request_date);
     this.onRequest();
   },
+  //查看行程详情
   Tapiteminfo: function(e){
     var iteminfo_object = this.data.shceList.find(item => item.id == e.currentTarget.dataset.id)
-    // console.log(iteminfo_object)
     var str= JSON.stringify(iteminfo_object);
     wx.navigateTo({
         url: '../schedule_info/schedule_info?str='+ str ,
