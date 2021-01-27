@@ -28,59 +28,6 @@ Page({
     user_token: '',
     username:'',
     Request_date:'',
-    // shceList :[
-    //   {
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     }, {
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     }, 
-    //     {
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     },{
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     }, {
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     }, {
-    //       id:'001',
-    //       name: "用餐-2号包厢",
-    //       type: "工作安排",
-    //       people: ['BBB','BBB','BBB','BBB','BBB','BBB'],
-    //       s_time:"2021-01-21 10:00:00",
-    //       e_time:"2021-01-21 11:30:00",
-    //       other:"aefdbscfvjdsnvkzndvabv"
-    //     }
-    //   ]
-    // ,
     Paramstring:'',
     Tripstring:'',
     shceList: [],
@@ -95,6 +42,11 @@ Page({
     this.onRequest();
   },
   onRequest:function() {
+    this.setData({
+      morning: true,
+      afternoon: true,
+      evening: true
+    })
     //请求token
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
@@ -265,12 +217,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
@@ -298,12 +252,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
@@ -327,12 +283,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day

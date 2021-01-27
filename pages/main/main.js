@@ -308,12 +308,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     console.log()
     this.setData({
@@ -343,12 +345,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
@@ -374,12 +378,14 @@ Page({
           [state1]: change_month
         });
     }
-    if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-      const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-      const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-        this.setData({
-          [state2]: change_day
-        });
+    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
+      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
+        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
+        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
+          this.setData({
+            [state2]: change_day
+          });
+      }
     }
     this.setData({
       Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
