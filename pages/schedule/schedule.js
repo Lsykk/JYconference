@@ -5,9 +5,10 @@ var app = getApp();
 
 Page({
   data: {
-    morning : true,
-    afternoon : true,
-    evening: true,
+    morning : false,
+    afternoon : false,
+    evening: false,
+    sche_num: false,
     colorList:[
       "#FFECA5",
       "#FFCFBE",
@@ -161,20 +162,45 @@ Page({
         a++;
       }
     }
-    if(m == 0) {
+    if(m != 0) {
+      this.setData({
+        morning : true
+      })
+    }
+    else {
       this.setData({
         morning : false
       })
     }
-    if(a == 0) {
+    if(a != 0) {
+      this.setData({
+        afternoon : true
+      })
+    }
+    else {
       this.setData({
         afternoon : false
       })
     }
-    if(e == 0) {
+    if(e != 0) {
+      this.setData({
+        evening : true
+      })
+    }
+    else {
       this.setData({
         evening : false
       })
+    }
+    if( m + a + e == 0){
+      this.setData({
+        sche_num : true 
+      })
+    }
+    else {
+      this.setData({
+        sche_num : false 
+      }) 
     }
   },
   onReady: function () {
