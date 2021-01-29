@@ -4,11 +4,11 @@
 <view class="infomation">
   <van-row span="8">
     <image src="/image/s_time.png"></image>
-    <text>开始: {{confo_info.s_time}}</text>
+    <text>开始: {{confo_info.start_time}}</text>
   </van-row>
   <van-row span="8">
     <image src="/image/e_time.png"></image>
-    <text>结束: {{confo_info.e_time}}</text>
+    <text>结束: {{confo_info.end_time}}</text>
   </van-row>
   <van-row span="8">
     <image src="/image/people.png"></image>
