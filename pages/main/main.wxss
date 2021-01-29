@@ -50,22 +50,22 @@
 
 .conference1 .van-col--5 {
   height: 2800rpx;
-  border-left: 1px solid rgb(240, 240, 240);
+  border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #D1ECFF; */
 }
 .conference2 .van-col--5 {
   height: 2800rpx;
-  border-left: 1px solid rgb(240, 240, 240);
+  border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #D8F4E6; */
 }
 .conference3 .van-col--5 {
   height: 2800rpx;
-  border-left: 1px solid rgb(240, 240, 240);
+  border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #FDF2D9; */
 }
 .conference4 .van-col--5 {
   height: 2800rpx;
-  border-left: 1px solid rgb(240, 240, 240);
+  border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #FFC9CE; */
 }
 

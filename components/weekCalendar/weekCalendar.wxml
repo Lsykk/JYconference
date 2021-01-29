@@ -21,8 +21,9 @@
       <view class='dateType'>{{timeBean.weekDayList[index].day}}</view>
       <!-- <text class='iconfont icon-mifan' style='color:#fff'></text> -->
     </view>
+    
 </view>
- 
+ <view class="short-term"></view>
 <view class='line-shadow'></view>
  
 <view class='suspension' bindtap='addMenuClick'>
