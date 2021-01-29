@@ -10,14 +10,14 @@ Page({
     evening: false,
     sche_num: false,
     colorList:[
-      "#FFECA5",
-      "#FFCFBE",
-      "#CBF8DB",
-      "#D2CEF7",
-      "#99DBFE",
-      "#F4D5F4",
-      "#FFDB5C",
-      "#9FE6B8",
+      "#FDE68A",//淡黄
+      "#FECACA",
+      "#A5F3FC",
+      "#C7D2FE",
+      "#D9F99D",
+      "#E5E5E5",
+      "#DDD6FE",
+      "#FBCFE8",
       "#FFA5BB",
       "#E7BCF3",
       "#D8DBDA"
@@ -32,6 +32,19 @@ Page({
     shceList: [],
   },
   onLoad: function () {
+    let nowdate = util.formatTime(new Date()) ;
+    let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
+    this.setData({
+      Request_date : nowdate_deal
+    })
+    this.onRequest();
+  },
+  onShow: function () {
+    // this.onLoad();
+    // console.log("刷新页面");
+    this.setData({
+      timeBean: utils.getWeekDayList(this.data.selectWeek)
+    })
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     this.setData({

@@ -1,5 +1,5 @@
 <view class="title">
-  <text>{{confo_info.name}}</text>
+  <text>培训会议 | {{confo_info.name}}</text>
 </view>
 <view class="infomation">
   <van-row span="8">

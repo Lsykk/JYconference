@@ -84,6 +84,19 @@ Page({
     })
     this.onRequest();
   },
+  onShow: function () {
+    // this.onLoad();
+    // console.log("刷新页面");
+    this.setData({
+      timeBean: utils.getWeekDayList(this.data.selectWeek)
+    })
+    let nowdate = util.formatTime(new Date()) ;
+    let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
+    this.setData({
+      Request_date : nowdate_deal
+    })
+    this.onRequest();
+  },
   //获取token
   onRequest:function(){
     let nowdate = util.formatTime(new Date()) ;

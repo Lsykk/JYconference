@@ -5,7 +5,7 @@
   </view>
   <!-- 列表 -->
   <view class="blank"  wx:if="{{sche_num == true}}">
-    <image></image>
+    <image src="/image/logo4.png"></image>
     <text>当日没有行程安排~</text>
   </view>
   <view  wx:if="{{sche_num == false}}">
