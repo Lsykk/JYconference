@@ -10,7 +10,8 @@ Page({
     password:'',
     token:'',
     Paramstring:'',
-    loginstring:''
+    loginstring:'',
+    code: null
   },
   //获取token
   Login_first: function(){
@@ -64,6 +65,21 @@ Page({
   },
   //登录验证
   Login_second() {
+//获取code 后端用于获取openid
+let _that = this;
+  wx.login({
+    success (res) {
+      if (res.code) {
+        console.log('获取code成功')
+        _that.setData({
+          code : res.code
+        })
+        console.log(_that.data.code)
+      } else {
+        console.log('获取code失败！' + res.errMsg)
+      }
+    }
+  })
     const darkpassword = md5.hexMD5(this.data.password);
     app.globalData.login = this.data.username ;
 
@@ -71,14 +87,14 @@ Page({
     const param = {
       login: this.data.username,
       userpassword: darkpassword,
-      token: this.data.token 
+      token: this.data.token,
+      code: this.data.code
     }
     const paramstring = JSON.stringify(param) ;
     this.setData({
       loginstring : paramstring
     })
     //发请求 登录验证
-    let _that = this;
     wx.request({
       url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
       method: "post",
@@ -93,9 +109,40 @@ Page({
         if ( ! res.data.ret ) {
           console.log("登录成功")
           Toast.success('登录成功!');
-          wx.reLaunch({
-            url:'../main/main?username='+_that.data.username
-          })
+    wx.showModal({
+           title: '温馨提示',
+           content: '为更好的管理您的日程安排，服务号需要在会议开始前向您发送提示消息',
+           confirmText:"同意",
+           cancelText:"拒绝",
+           success: function (res) {
+               if (res.confirm) {
+                  //调用订阅消息
+                   console.log('用户点击确定');
+                   //调用订阅
+                   _that.requestSubscribe();
+               } else if (res.cancel) {
+                   console.log('用户点击取消');
+                   ///显示第二个弹说明一下
+                   wx.showModal({
+                     title: '温馨提示',
+                     content: '拒绝后您将无法收到会议提示信息!',
+                     confirmText:"知道了",
+                     showCancel:false,
+                     success: function (res) {
+                       ///点击知道了的后续操作 
+                       ///如跳转首页面 
+                                 //跳转至 会议中心
+                        wx.reLaunch({
+                          url:'../main/main?username='+_that.data.username
+                      })
+                     }
+                 });
+               }
+           }
+       });
+          // wx.reLaunch({
+          //   url:'../main/main?username='+_that.data.username
+          // })
         }
         else {
           console.log("登录失败");
@@ -106,5 +153,25 @@ Page({
         console.log(res.data)
       }
     })
+  },
+  ///发起消息订阅
+  requestSubscribe: function(){
+    let that = this ;
+    wx.requestSubscribeMessage({
+          tmplIds: ['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'],
+          success :(res)=>{
+            console.log("订阅消息 成功 "+res);
+          },
+          fail :(errCode,errMessage) =>{ 
+            console.log("订阅消息 失败 "+errCode+" message "+errMessage);
+          },
+          complete:(errMsg)=>{
+            console.log("订阅消息 完成 "+errMsg);
+            //跳转至 会议中心
+            wx.reLaunch({
+                url:'../main/main?username='+that.data.username
+            })
+          }
+    });
   }
 })

@@ -68,7 +68,9 @@ Page({
     username:'',
     Request_date:'',
     Paramstring:'',
-    Meetingstring:''
+    Meetingstring:'',
+    setInter:'',
+    num: 0
   },
   onLoad: function (option) {
     this.setData({
@@ -200,6 +202,50 @@ Page({
           [state6]: length_num
         });
       }
+      //触发订阅函数
+      // for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
+      // const name = this.data.Conference_list[i].title;
+      // const time = this.data.Conference_list[i].start_time;
+      // const location = this.data.Conference_list[i].room;
+      // const other = this.data.Conference_list[i].other;
+      // let _that = this;
+      // wx.request({
+      //   url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN',
+      //   method: "post",
+      //   data: {
+      //     "touser": "OPENID",
+      //     "template_id": "COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM",
+      //     "page": "index",
+      //     "miniprogram_state":"developer",
+      //     "lang":"zh_CN",
+      //     "data": {
+      //         "thing1": {
+      //             "value": "嘉悦物产集团"
+      //         },
+      //         "thing2": {
+      //             "value": name
+      //         },
+      //         "date3": {
+      //             "value": time
+      //         } ,
+      //         "thing4": {
+      //             "value": location
+      //         },
+      //         "thing5": {
+      //           "value": other
+      //       }
+      //     }
+      //   },
+      //   method: 'post', 
+      //   success(res){
+      //     console.log(res); 
+      //   }
+      // })
+    // }
+
+
+
+
       //会议室分组 根据地点
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         if ( this.data.Conference_list[i].room == '30楼大会议室')

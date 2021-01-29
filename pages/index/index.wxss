@@ -17,18 +17,22 @@
 }
 .login_button {
   text-align: center;
+  padding-bottom: 16%;
 }
 .van-button--primary {
   width: 500rpx;
 }
 .logo2 {
-  height: 300px;
+  /* height: 300px; */
+  display:flex;               
+  justify-content: center;     
 }
 .logo2 image {
   width: 100px;
   height: 100px;
-  display: block;
-  margin: 150px auto;
+  
+  /* display: block; */
+  /* margin: 150px auto; */
 }
 .van-cell--borderless {
   margin-top: 40rpx;
