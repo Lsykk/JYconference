@@ -167,3 +167,26 @@ margin-left: 100px;
 .main {
   margin-top: 20rpx;
 }
+.card {
+  animation:mymove 0.3s forwards;
+	-webkit-animation:mymove 0.3s forwards; /*Safari and Chrome*/
+}
+@keyframes mymove
+{
+  0%{
+    transform: scale(0);  /*开始为原始大小*/
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+  0%{
+    transform: scale(0);  /*开始为原始大小*/
+  }
+  100%{
+    transform: scale(1);
+  }
+}

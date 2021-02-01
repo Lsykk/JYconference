@@ -11,7 +11,8 @@ Page({
     token:'',
     Paramstring:'',
     loginstring:'',
-    code: null
+    code: null,
+    access_token:''
   },
   //获取token
   Login_first: function(){
@@ -65,94 +66,188 @@ Page({
   },
   //登录验证
   Login_second() {
-//获取code 后端用于获取openid
-let _that = this;
-  wx.login({
-    success (res) {
-      if (res.code) {
-        console.log('获取code成功')
-        _that.setData({
-          code : res.code
-        })
-        console.log(_that.data.code)
-      } else {
-        console.log('获取code失败！' + res.errMsg)
-      }
-    }
-  })
-    const darkpassword = md5.hexMD5(this.data.password);
-    app.globalData.login = this.data.username ;
-
-    //登录验证参数准备
-    const param = {
-      login: this.data.username,
-      userpassword: darkpassword,
-      token: this.data.token,
-      code: this.data.code
-    }
-    const paramstring = JSON.stringify(param) ;
-    this.setData({
-      loginstring : paramstring
-    })
-    //发请求 登录验证
+    let _that = this;
+    //获取小程序全局唯一后台接口调用凭据（access_token）
     wx.request({
-      url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
-      method: "post",
-      data: {
-          "login" : _that.data.loginstring
+      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET',
+      method: "get",
+      data : {
+        "grant_type" : 'client_credential',
+        "appid" : 'wxa942667c17cd73e0',
+        "secret" : '4ea1ab19a9c1d426fba528e5a4775ab4'
       },
       header: {
         'content-type': 'text/plain'
       },
-      success (res) {
-        app.globalData.uid = res.data.msg ;
-        if ( ! res.data.ret ) {
-          console.log("登录成功")
-          Toast.success('登录成功!');
-    wx.showModal({
-           title: '温馨提示',
-           content: '为更好的管理您的日程安排，服务号需要在会议开始前向您发送提示消息',
-           confirmText:"同意",
-           cancelText:"拒绝",
-           success: function (res) {
-               if (res.confirm) {
-                  //调用订阅消息
-                   console.log('用户点击确定');
-                   //调用订阅
-                   _that.requestSubscribe();
-               } else if (res.cancel) {
-                   console.log('用户点击取消');
-                   ///显示第二个弹说明一下
-                   wx.showModal({
-                     title: '温馨提示',
-                     content: '拒绝后您将无法收到会议提示信息!',
-                     confirmText:"知道了",
-                     showCancel:false,
-                     success: function (res) {
-                       ///点击知道了的后续操作 
-                       ///如跳转首页面 
-                                 //跳转至 会议中心
-                        wx.reLaunch({
-                          url:'../main/main?username='+_that.data.username
-                      })
-                     }
-                 });
-               }
-           }
-       });
-          // wx.reLaunch({
-          //   url:'../main/main?username='+_that.data.username
-          // })
-        }
-        else {
-          console.log("登录失败");
-          Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
-        }        
+      success (res) {  
+        console.log(res)
+        _that.setData({
+          access_token : res.data.access_token
+        })
+        console.log("拿到的access_token: "+_that.data.access_token);
+        //获取code+登录验证接口
+        wx.login({
+          success (res) {
+            console.log(res);
+            if (res.code) {
+              console.log('获取code成功')
+              _that.setData({
+                code : res.code
+              })
+              console.log("拿到的code: "+_that.data.code)
+              const darkpassword = md5.hexMD5(_that.data.password);
+              app.globalData.login = _that.data.username ;
+              //登录验证参数准备
+              const param = {
+                login: _that.data.username,
+                userpassword: darkpassword,
+                token: _that.data.token,
+                code: _that.data.code,
+                access_token: _that.data.access_token
+              }
+              const paramstring = JSON.stringify(param) ;
+              _that.setData({
+                loginstring : paramstring
+              })
+              console.log("登录验证接口的请求参数:"+_that.data.loginstring);
+              //发请求 登录验证
+              wx.request({
+                url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
+                method: "post",
+                data: {
+                    "login" : _that.data.loginstring
+                },
+                header: {
+                  'content-type': 'text/plain'
+                },
+                success (res) {
+                  app.globalData.uid = res.data.msg ;
+                  if ( ! res.data.ret ) {
+                    console.log("登录成功")
+                    Toast.success('登录成功!');
+                    wx.showModal({
+                          title: '温馨提示',
+                          content: '为更好的管理您的日程安排，服务号需要在会议开始前向您发送提示消息',
+                          confirmText:"同意",
+                          cancelText:"拒绝",
+                          success: function (res) {
+                              if (res.confirm) {
+                                  //调用订阅消息
+                                  console.log('用户点击确定');
+                                  //调用订阅
+                                  _that.requestSubscribe();
+                              } else if (res.cancel) {
+                                  console.log('用户点击取消');
+                                  ///显示第二个弹说明一下
+                                  wx.showModal({
+                                    title: '温馨提示',
+                                    content: '拒绝后您将无法收到会议提示信息!',
+                                    confirmText:"知道了",
+                                    showCancel:false,
+                                    success: function (res) {
+                                      ///点击知道了的后续操作 
+                                      ///如跳转首页面 
+                                                //跳转至 会议中心
+                                        wx.reLaunch({
+                                          url:'../main/main?username='+_that.data.username
+                                      })
+                                    }
+                                });
+                              }
+                          }
+                      });
+                  }
+                  else {
+                    console.log("登录失败");
+                    Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
+                  }        
+                },
+                fail (res) {
+                  console.log(res.data)
+                }
+              })
+            } else {
+              console.log('获取code失败！' + res.errMsg)
+            }
+          }
+        })
       },
       fail (res) {
-        console.log(res.data)
+        console.log(res)
       }
     })
+    // const darkpassword = md5.hexMD5(this.data.password);
+    // app.globalData.login = this.data.username ;
+    // //登录验证参数准备
+    // const param = {
+    //   login: this.data.username,
+    //   userpassword: darkpassword,
+    //   token: this.data.token,
+    //   code: this.data.code
+    // }
+    // const paramstring = JSON.stringify(param) ;
+    // this.setData({
+    //   loginstring : paramstring
+    // })
+    // //发请求 登录验证
+    // wx.request({
+    //   url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
+    //   method: "post",
+    //   data: {
+    //       "login" : _that.data.loginstring
+    //   },
+    //   header: {
+    //     'content-type': 'text/plain'
+    //   },
+    //   success (res) {
+    //     app.globalData.uid = res.data.msg ;
+    //     if ( ! res.data.ret ) {
+    //       console.log("登录成功")
+    //       Toast.success('登录成功!');
+    // wx.showModal({
+    //        title: '温馨提示',
+    //        content: '为更好的管理您的日程安排，服务号需要在会议开始前向您发送提示消息',
+    //        confirmText:"同意",
+    //        cancelText:"拒绝",
+    //        success: function (res) {
+    //            if (res.confirm) {
+    //               //调用订阅消息
+    //                console.log('用户点击确定');
+    //                //调用订阅
+    //                _that.requestSubscribe();
+    //            } else if (res.cancel) {
+    //                console.log('用户点击取消');
+    //                ///显示第二个弹说明一下
+    //                wx.showModal({
+    //                  title: '温馨提示',
+    //                  content: '拒绝后您将无法收到会议提示信息!',
+    //                  confirmText:"知道了",
+    //                  showCancel:false,
+    //                  success: function (res) {
+    //                    ///点击知道了的后续操作 
+    //                    ///如跳转首页面 
+    //                              //跳转至 会议中心
+    //                     wx.reLaunch({
+    //                       url:'../main/main?username='+_that.data.username
+    //                   })
+    //                  }
+    //              });
+    //            }
+    //        }
+    //    });
+    //       // wx.reLaunch({
+    //       //   url:'../main/main?username='+_that.data.username
+    //       // })
+    //     }
+    //     else {
+    //       console.log("登录失败");
+    //       Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
+    //     }        
+    //   },
+    //   fail (res) {
+    //     console.log(res.data)
+    //   }
+    // })
   },
   ///发起消息订阅
   requestSubscribe: function(){
