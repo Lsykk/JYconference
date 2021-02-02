@@ -74,7 +74,7 @@ Page({
       data : {
         "grant_type" : 'client_credential',
         "appid" : 'wxa942667c17cd73e0',
-        "secret" : '4ea1ab19a9c1d426fba528e5a4775ab4'
+        "secret" : '03a55d9bb6296f5f0f2eb87c94610fed'
       },
       header: {
         'content-type': 'text/plain'

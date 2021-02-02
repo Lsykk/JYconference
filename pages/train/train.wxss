@@ -20,55 +20,63 @@
   text-align: center;
   height: 80rpx;
 }
-.van-col--5 {
+.van-col--4 {
   text-align: center;
   /* height: 80rpx; */
   /* border-radius: 20rpx; */
   margin-bottom: 10rpx;
 }
-.van-col--5 text {
+.van-col--4 text {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
-.room1 .van-col--5{
+.room1 .van-col--4{
   height: 80rpx;
   background-color: #FFECA5;
 }
-.room2 .van-col--5{
+.room2 .van-col--4{
   height: 80rpx;
   background-color: #FFCFBE;
 }
-.room3 .van-col--5{
+.room3 .van-col--4{
   height: 80rpx;
   background-color: #CBF8DB;
 }
-.room4 .van-col--5{
+.room4 .van-col--4{
   height: 80rpx;
   background-color: #D2CEF7;
 }
+.room5 .van-col--4{
+  height: 80rpx;
+  background-color: #F4D5F4;
+}
 
-.conference1 .van-col--5 {
+.conference1 .van-col--4 {
   height: 2800rpx;
   border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #D1ECFF; */
 }
-.conference2 .van-col--5 {
+.conference2 .van-col--4 {
   height: 2800rpx;
   border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #D8F4E6; */
 }
-.conference3 .van-col--5 {
+.conference3 .van-col--4 {
   height: 2800rpx;
   border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #FDF2D9; */
 }
-.conference4 .van-col--5 {
+.conference4 .van-col--4 {
   height: 2800rpx;
   border-left: 1px dashed rgb(240, 240, 240);
   /* background-color: #FFC9CE; */
 }
-
+.conference5 .van-col--4 {
+  height: 2800rpx;
+  border-left: 1px dashed rgb(240, 240, 240);
+  /* background-color: #FFC9CE; */
+}
 .weui-cell-third{
   background: #fff;
 }
@@ -113,28 +121,35 @@ margin-left: 100px;
   /* background-color: #FFDB5C; */
   border-radius: 20rpx;
   position: absolute;
-  width: 20.83333333%;
+  width: 16.664%;
   /* margin-top: 100%; */
 }
 .hot-item2 {
   /* background-color: #FF9F7F; */
   border-radius: 20rpx;
   position: absolute;
-  width: 20.83333333%;
+  width: 16.664%;
   /* margin-top: 100%; */
 }
 .hot-item3 {
   /* background-color: #9FE6B8; */
   border-radius: 20rpx;
   position: absolute;
-  width: 20.83333333%;
+  width: 16.664%;
   /* margin-top: 100%; */
 }
 .hot-item4 {
   /* background-color: #D2CEF7; */
   border-radius: 20rpx;
   position: absolute;
-  width: 20.83333333%;
+  width: 16.664%;
+  /* margin-top: 100%; */
+}
+.hot-item5 {
+  /* background-color: #D2CEF7; */
+  border-radius: 20rpx;
+  position: absolute;
+  width: 16.664%;
   /* margin-top: 100%; */
 }
 .calendar_main image {

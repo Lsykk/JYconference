@@ -24,6 +24,7 @@ Page({
     thirty_s:[],
     thirty_eight_s:[],
     shanghai_b:[],
+    thirty_eight_b:[],
     date: '',
     show: false,
     time_line:[
@@ -255,6 +256,7 @@ Page({
       //   }
       // })
     // }
+    // console.log(this.data.Conference_list);
 
 
 
@@ -265,8 +267,10 @@ Page({
           this.data.thirty_b.push(this.data.Conference_list[i]);
         else if ( this.data.Conference_list[i].room == '30楼小会议室' ) 
           this.data.thirty_s.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '38楼小会议室' )
+        else if ( this.data.Conference_list[i].room == '3805小会议室' )
           this.data.thirty_eight_s.push(this.data.Conference_list[i]);
+        else if ( this.data.Conference_list[i].room == '3801大会议室' )
+          this.data.thirty_eight_b.push(this.data.Conference_list[i]);
         else
           this.data.shanghai_b.push(this.data.Conference_list[i]);
       }
@@ -274,8 +278,19 @@ Page({
         thirty_b : this.data.Conference_list,
         thirty_s : this.data.Conference_list,
         thirty_eight_s : this.data.Conference_list,
-        shanghai_b : this.data.Conference_list
+        shanghai_b : this.data.Conference_list,
+        thirty_eight_b : this.data.Conference_list
       });
+      // console.log("this.data.thirty_b");
+      // console.log(this.data.thirty_b);
+      // console.log("this.data.thirty_s");
+      // console.log(this.data.thirty_s);
+      // console.log("this.data.thirty_eight_s");
+      // console.log(this.data.thirty_eight_s);
+      // console.log("this.data.shanghai_b");
+      // console.log(this.data.shanghai_b);
+      // console.log("this.data.thirty_eight_b");
+      // console.log(this.data.thirty_eight_b);
   },
   onReady: function () {
     this.setData({
