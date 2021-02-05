@@ -253,9 +253,33 @@ Page({
   requestSubscribe: function(){
     let that = this ;
     wx.requestSubscribeMessage({
-          tmplIds: ['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'],
-          success :(res)=>{
-            console.log("订阅消息 成功 "+res);
+          tmplIds: ['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM','qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'],
+          // success :(res)=>{
+          //   console.log("订阅消息 成功 "+res);
+          // },
+          success(res){
+              // 模板id1的处理逻辑
+              if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'accept') {
+                  console.log("用户订阅了会议通知"+res);
+              } else if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'reject') {
+                  console.log("用户取消订阅会议通知"+res);
+                  wx.showModal({
+                    title: '提示',
+                    content: '你取消订阅会议通知',
+                    showCancel: false
+                  })
+              }
+              // 模板id2的处理逻辑
+              if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'accept') {
+                console.log("用户订阅了行程通知"+res);
+              } else if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'reject') {
+                console.log("用户取消订阅行程通知"+res);
+                wx.showModal({
+                  title: '提示',
+                  content: '你取消订阅行程通知',
+                  showCancel: false
+                })
+              }
           },
           fail :(errCode,errMessage) =>{ 
             console.log("订阅消息 失败 "+errCode+" message "+errMessage);
