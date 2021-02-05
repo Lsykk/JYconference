@@ -253,31 +253,38 @@ Page({
   requestSubscribe: function(){
     let that = this ;
     wx.requestSubscribeMessage({
-          tmplIds: ['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'],
-          // success :(res)=>{
-          //   console.log("订阅消息 成功 "+res);
-          // },
+          tmplIds: ['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM','qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'],
           success(res){
               // 模板id1的处理逻辑
-              // if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'accept') {
-              //     console.log("用户订阅了会议通知"+res);
-              // } else if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'reject') {
-              //     console.log("用户取消订阅会议通知"+res);
-              //     wx.showModal({
-              //       title: '提示',
-              //       content: '你取消订阅会议通知',
-              //       showCancel: false
-              //     })
-              // }
+              if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'accept') {
+                  console.log("用户订阅了会议通知");
+              } else if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'reject') {
+                  console.log("用户取消订阅会议通知");
+                  wx.showModal({
+                    title: '提示',
+                    content: '你取消订阅会议通知',
+                    showCancel: false
+                  })
+              }else {
+                wx.showToast({
+                  title: '授权会议通知订阅消息有误',
+                  icon: 'none'
+                })
+              }
               // 模板id2的处理逻辑
               if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'accept') {
-                console.log("用户订阅了日程通知"+res);
+                console.log("用户订阅了日程通知");
               } else if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'reject') {
-                console.log("用户取消订阅行程通知"+res);
+                console.log("用户取消订阅行程通知");
                 wx.showModal({
                   title: '提示',
                   content: '你取消订阅日程通知',
                   showCancel: false
+                })
+              }else {
+                wx.showToast({
+                  title: '授权日程通知订阅消息有误',
+                  icon: 'none'
                 })
               }
           },
@@ -285,7 +292,8 @@ Page({
             console.log("订阅消息 失败 "+errCode+" message "+errMessage);
           },
           complete:(errMsg)=>{
-            console.log("订阅消息 完成 "+errMsg);
+            console.log("订阅消息 完成 ");
+            console.log(errMsg);
             //跳转至 会议中心
             wx.reLaunch({
                 url:'../main/main?username='+that.data.username
