@@ -1,32 +1,11 @@
 var util = require("../../utils/util");
-var utils = require("../../utils/time-utils");
 import md5 from "../../utils/MD5";
+var app = getApp();
 Page({
   data: {
-    colorList:[
-      "#FFECA5",
-      "#FFCFBE",
-      "#CBF8DB",
-      "#D2CEF7",
-      "#99DBFE",
-      "#F4D5F4",
-      "#FFDB5C",
-      "#9FE6B8",
-      "#FFA5BB",
-      "#E7BCF3",
-      "#D8DBDA"
-    ],
-    selectWeek:0,
-    timeBean:{},
-    datastring:'',
+    meeting_num: false,
     Conference_list: [],
-    thirty_b:[],
-    thirty_s:[],
-    thirty_eight_s:[],
-    shanghai_b:[],
-    thirty_eight_b:[],
     date: '',
-    show: false,
     time_line:[
       {
         time: '08:30'
@@ -69,9 +48,7 @@ Page({
     username:'',
     Request_date:'',
     Paramstring:'',
-    Meetingstring:'',
-    setInter:'',
-    num: 0
+    Meetingstring:''
   },
   onLoad: function (option) {
     this.setData({
@@ -82,7 +59,6 @@ Page({
     this.setData({
       Request_date : nowdate_deal
     })
-    console.log(this.data.Request_date);
     this.onRequest();
   },
   onShow: function () {
@@ -91,6 +67,15 @@ Page({
     this.setData({
       Request_date : nowdate_deal
     })
+    // console.log('父组件onshow');
+
+    // let myView = this.selectComponent('#myChildren')    //选择组件
+    // console.log(myView.data.dateCurrentStr);
+    // console.log('myView' , myView);
+    // myView.setData({
+    //   dateCurrentStr: this.data.Request_date        //改变值
+    // })
+    // console.log(myView.data.dateCurrentStr);
     this.onRequest();
   },
   //获取token
@@ -129,7 +114,7 @@ Page({
       },
       fail (res) {
         console.log("获取token失败");
-        console.log(res)
+        // console.log(res)
       }
     })
   },
@@ -162,16 +147,27 @@ Page({
           _that.setData({
             Conference_list : res.data.data
           })
+          
           _that.onListDeal();
         },
         fail (res) {
-          // console.log("获取会议室信息失败");
-          console.log(res.data);
+          console.log("获取会议室信息失败");
+          // console.log(res.data);
         }
     })
   },
   //会议室数据处理
   onListDeal:function() {
+      if( this.data.Conference_list.length == 0){
+        this.setData({
+          meeting_num : true 
+        })
+      }
+      else {
+        this.setData({
+          meeting_num : false 
+        }) 
+      }
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         var new_s_time = this.data.Conference_list[i].start_time.substr(11,15)
         var new_s_time_hour = new_s_time.substr(0,2);
@@ -195,45 +191,21 @@ Page({
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
-        // var idd = i.toString();
-        var bgc = this.data.colorList[ i % 11 ] ;
+        var bgc = app.globalData.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
-        // const state4 = "Conference_list["+ i +"].id"
-        const state5 = "Conference_list["+ i +"].bg_color"
-        const state6 = "Conference_list["+ i +"].time_length"
+        const state4 = "Conference_list["+ i +"].bg_color"
+        const state5 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
-          // [state4]: idd,
-          [state5]: bgc,
-          [state6]: length_num
+          [state4]: bgc,
+          [state5]: length_num
         });
       }
     // console.log(this.data.Conference_list);
-
-      //会议室分组 根据地点
-      for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
-        if ( this.data.Conference_list[i].room == '30楼大会议室')
-          this.data.thirty_b.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '30楼小会议室' ) 
-          this.data.thirty_s.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '3805小会议室' )
-          this.data.thirty_eight_s.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '3801大会议室' )
-          this.data.thirty_eight_b.push(this.data.Conference_list[i]);
-        else
-          this.data.shanghai_b.push(this.data.Conference_list[i]);
-      }
-      this.setData({
-        thirty_b : this.data.Conference_list,
-        thirty_s : this.data.Conference_list,
-        thirty_eight_s : this.data.Conference_list,
-        shanghai_b : this.data.Conference_list,
-        thirty_eight_b : this.data.Conference_list
-      });
   },
   //查看会议详情
   Tapiteminfo: function(e){
@@ -243,7 +215,9 @@ Page({
         url: '../info/info?str='+ str ,
       })
   },
-  mydata(e){ //可获取日历点击事件
+  //切换日期
+  mydata(e){
+    // console.log(e);
     let data = e.detail.data
     // console.log(data)
     this.setData({
@@ -251,6 +225,4 @@ Page({
     })
     this.onRequest();
    }
-
-
 })

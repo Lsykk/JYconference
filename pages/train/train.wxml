@@ -1,7 +1,8 @@
 <scorll-view scroll-y="true" style="height: 100vh;">
   <!-- 日历 -->
-  <view>
-    <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar>
+  <view class="rowmax">
+   <calendarMonth id='myChildren' bindmydata="mydata"></calendarMonth>
+    <view class="short-term"></view>
   </view>
   <!-- 列表 -->
   <view class="main">
@@ -36,62 +37,67 @@
       </block>
     </view>
       </van-col>
-      <van-col span="4" class="conference1">
-      <!-- <view>{{datastring}}</view> -->
-          <view class="discovermain">
-                <view class="hot">
-                    <view class="hot-item1" wx:if="{{item.room == '30楼大会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
-                    style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
-                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
-                        <view class="itempeople" wx:if="{{item.title.length<=20||item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+      <view class="blank"  wx:if="{{meeting_num == true}}">
+          <image src="/image/logo4.png"></image>
+          <text>当日没有会议安排~</text>
+      </view>
+      <view  wx:if="{{meeting_num == false}}">
+          <van-col span="4" class="conference1">
+              <view class="discovermain">
+                    <view class="hot">
+                        <view class="hot-item1" wx:if="{{item.room == '30楼大会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_b}}" wx:key="key" bindtap="Tapiteminfo" 
+                        style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
+                            <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
+                            <view class="itempeople" wx:if="{{item.title.length<=20||item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+                        </view>
                     </view>
                 </view>
-            </view>
-      </van-col>
-      <van-col span="4" class="conference2">
-            <view class="discovermain">
-                <view class="hot">
-                    <view class="hot-item2" wx:if="{{item.room == '30楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
-                    style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
-                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
-                        <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+          </van-col>
+          <van-col span="4" class="conference2">
+              <view class="discovermain">
+                        <view class="hot">
+                            <view class="hot-item2" wx:if="{{item.room == '30楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_s}}" wx:key="key" bindtap="Tapiteminfo" 
+                            style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
+                                <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
+                                <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+                            </view>
+                        </view>
                     </view>
-                </view>
-            </view>
-      </van-col>
-      <van-col span="4" class="conference3">
-            <view class="discovermain">
-                <view class="hot">
-                    <view class="hot-item3" wx:if="{{item.room == '38楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_s}}" wx:key="key" bindtap="Tapiteminfo"
-                    style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
-                        <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
-                        <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+          </van-col>
+          <van-col span="4" class="conference3">
+              <view class="discovermain">
+                        <view class="hot">
+                            <view class="hot-item3" wx:if="{{item.room == '38楼小会议室'}}" data-id="{{item.id}}" wx:for="{{thirty_eight_s}}" wx:key="key" bindtap="Tapiteminfo"
+                            style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
+                                <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
+                                <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+                            </view>
+                        </view>
                     </view>
-                </view>
-            </view>
-      </van-col>
-      <van-col span="4" class="conference4">
-            <view class="discovermain">
-                <view class="hot">
-                    <view class="hot-item4" wx:if="{{item.room == '大会议室（上海）'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
-                    style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
-                          <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
-                          <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+          </van-col>
+          <van-col span="4" class="conference4">
+              <view class="discovermain">
+                        <view class="hot">
+                            <view class="hot-item4" wx:if="{{item.room == '大会议室（上海）'}}" wx:for="{{shanghai_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
+                            style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
+                                  <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
+                                  <view class="itempeople" wx:if="{{item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+                            </view>
+                        </view>
                     </view>
-                </view>
-            </view>
-      </van-col>
-      <van-col span="4" class="conference5">
-            <view class="discovermain">
-                <view class="hot">
-                    <view class="hot-item5" wx:if="{{item.room == '3801大会议室'}}" wx:for="{{thirty_eight_b}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
-                    style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
-                       <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
-                        <view class="itempeople" wx:if="{{item.title.length<=20||item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+          </van-col>
+          <van-col span="4" class="conference5">
+              <view class="discovermain">
+                        <view class="hot">
+                            <view class="hot-item5" wx:if="{{item.room == '3801大会议室'}}" wx:for="{{Conference_list}}" data-id="{{item.id}}" wx:key="key" bindtap="Tapiteminfo"
+                            style="height:{{item.length}};margin-top: {{item.m_top}};background-color: {{item.bg_color}};">
+                              <view class="itemtitle" style="margin-top: {{item.titlem_top}};">{{item.name}}</view>
+                                <view class="itempeople" wx:if="{{item.title.length<=20||item.title.length<=5||item.time_length>120}}">{{item.people}}</view>
+                            </view>
+                        </view>
                     </view>
-                </view>
-            </view>
-      </van-col>
+          </van-col>
+      </view>
     </van-row>
   </view>
 </scorll-view>

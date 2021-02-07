@@ -1,34 +1,14 @@
 var util = require("../../utils/util");
 var utils = require("../../utils/time-utils");
+var app = getApp();
 import md5 from "../../utils/MD5";
 var app = getApp()
 
 Page({
   data: {
-    colorList:[
-      "#FFECA5",
-      "#FFCFBE",
-      "#CBF8DB",
-      "#D2CEF7",
-      "#99DBFE",
-      "#F4D5F4",
-      "#FFDB5C",
-      "#9FE6B8",
-      "#FFA5BB",
-      "#E7BCF3",
-      "#D8DBDA"
-    ],
-    selectWeek:0,
-    timeBean:{},
-    datastring:'',
+    meeting_num: false,
     Conference_list: [],
-    thirty_b:[],
-    thirty_s:[],
-    thirty_eight_s:[],
-    shanghai_b:[],
-    thirty_eight_b:[],
     date: '',
-    show: false,
     time_line:[
       {
         time: '08:30'
@@ -86,11 +66,6 @@ Page({
     this.onRequest();
   },
   onShow: function () {
-    // this.onLoad();
-    // console.log("刷新页面");
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     this.setData({
@@ -174,6 +149,16 @@ Page({
   },
   //培训会议列表数据处理
   onListDeal:function() {
+      if( this.data.Conference_list.length == 0){
+        this.setData({
+          meeting_num : true 
+        })
+      }
+      else {
+        this.setData({
+          meeting_num : false 
+        }) 
+      }
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
         var new_s_time = this.data.Conference_list[i].start_time.substr(11,15)
         var new_s_time_hour = new_s_time.substr(0,2);
@@ -197,47 +182,20 @@ Page({
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
-        // var idd = i.toString();
-        var bgc = this.data.colorList[ i % 11 ] ;
+        var bgc = app.globalData.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
-        // const state4 = "Conference_list["+ i +"].id"
-        const state5 = "Conference_list["+ i +"].bg_color"
-        const state6 = "Conference_list["+ i +"].time_length"
+        const state4 = "Conference_list["+ i +"].bg_color"
+        const state5 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
-          // [state4]: idd,
-          [state5]: bgc,
-          [state6]: length_num
+          [state4]: bgc,
+          [state5]: length_num
         });
       }
-      for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
-        if ( this.data.Conference_list[i].room == '30楼大会议室')
-          this.data.thirty_b.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '30楼小会议室' ) 
-          this.data.thirty_s.push(this.data.Conference_list[i]);
-          else if ( this.data.Conference_list[i].room == '3805小会议室' )
-          this.data.thirty_eight_s.push(this.data.Conference_list[i]);
-        else if ( this.data.Conference_list[i].room == '3801大会议室' )
-          this.data.thirty_eight_b.push(this.data.Conference_list[i]);
-        else
-          this.data.shanghai_b.push(this.data.Conference_list[i]);
-      }
-      this.setData({
-        thirty_b : this.data.Conference_list,
-        thirty_s : this.data.Conference_list,
-        thirty_eight_s : this.data.Conference_list,
-        shanghai_b : this.data.Conference_list,
-        thirty_eight_b : this.data.Conference_list
-      });
-  },
-  onReady: function () {
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
   },
   formatDate(date) {
     date = new Date(date);
@@ -251,101 +209,14 @@ Page({
         url: '../train_info/train_info?str='+ str ,
       })
   },
-  //上一周
-  lastWeek:function(e){   
-    var selectWeek = --this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0) {
-      timeBean.selectDay = 0;
-    }
-    this.setData({
-      timeBean,
-      selectWeek
-    });
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
-  //下一周
-  nextWeek:function(e){
-    var selectWeek = ++this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0){
-      timeBean.selectDay = 0;
-    }
-    this.setData({
-      timeBean,
-      selectWeek
-    })
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
   //切换日期
-  dayClick:function(e){
-    var timeBean = this.data.timeBean
-    timeBean.selectDay = e.detail;
+  mydata(e){
+    // console.log(e);
+    let data = e.detail.data
+    // console.log(data)
     this.setData({
-      timeBean
+      Request_date : data
     })
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
     this.onRequest();
-  }
+   }
 })

@@ -1,29 +1,25 @@
 App({
   globalData: {
     login: "",
-    uid:""
+    uid:"",
+    colorList:[
+      "#FFECA5",
+      "#FFCFBE",
+      "#CBF8DB",
+      "#D2CEF7",
+      "#99DBFE",
+      "#F4D5F4",
+      "#FFDB5C",
+      "#9FE6B8",
+      "#FFA5BB",
+      "#E7BCF3",
+      "#D8DBDA"
+    ]
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    // wx.requestSubscribeMessage({
-    //   tmplIds: ["COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM"],
-    //   success: function (res) {
-    //     if (res.COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM === 'accept'){
-    //       wx.showToast({
-    //         title: '订阅OK！',
-    //       })
-    //     }
-    //     console.log(res)
-    //     //成功
-    //   },
-    //   fail(err) {
-    //     //失败
-    //     console.error(err);
-    //   }
-    // })
-    
  
   },
   

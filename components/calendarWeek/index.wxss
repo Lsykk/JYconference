@@ -37,7 +37,10 @@
  }
  .week{
   color: #999;
-  font-size: 24rpx;
+  font-size: 28rpx;
+ }
+ .day{
+  font-size: 32rpx;
  }
  .day text {
   position: relative;
@@ -58,19 +61,18 @@
   /* opacity: 0.3; */
   z-index: -1;
  }
- .day text.active {
+ .day .active {
   color: white;
  }
- .day text.reds {
-  /* color: white; */
+ .day .reds {
+  color: black;
  }
  /*开始*/
  
- .headerone {
+ /* .headerone {
   width: 100%;
   height: auto;
   font-size: 24rpx;
-  /* margin: 0 30rpx; */
  }
  .headerone .ra {
   margin-right: 20rpx;
@@ -107,7 +109,6 @@
  .headertwo .ri .one view .jiao {
   margin: 0 16rpx;
   border:15rpx solid;
-  /* margin-top: 15rpx; */
   border-color: #ffffff #ffffff #b3b3b3 #ffffff;
  }
  .xi {
@@ -117,7 +118,7 @@
   border-radius: 6px 0px 0 6px;
  
  }
- .headertwo .ri .one view view.jiaos {
+ .headertwo .ri .one view view .jiaos{
   margin: 0 16rpx;
   border:15rpx solid;
   margin-top: 14rpx;
@@ -130,12 +131,12 @@
  }
  .headertwo .ri .two .body{
   width: 100%;
-  /* padding-left: 60rpx; */
-  /* padding-right: 22rpx; */
+  padding-left: 60rpx;
+  padding-right: 22rpx;
   padding-top: 24rpx;
   padding-bottom :24rpx;
  
- }
+ } */
 
  .rowmax {
   border-bottom-left-radius: 20px;

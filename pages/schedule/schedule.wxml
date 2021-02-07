@@ -1,7 +1,8 @@
 <scorll-view scroll-y="true" style="height: 100vh;">
   <!-- 日历 -->
-  <view>
-    <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar>
+  <view class="rowmax">
+   <calendarMonth id='myChildren' bindmydata="mydata"></calendarMonth>
+    <view class="short-term"></view>
   </view>
   <!-- 列表 -->
   <view class="blank"  wx:if="{{sche_num == true}}">

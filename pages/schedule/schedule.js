@@ -1,5 +1,4 @@
 var util = require("../../utils/util");
-var utils = require("../../utils/time-utils");
 import md5 from "../../utils/MD5";
 var app = getApp();
 
@@ -9,21 +8,6 @@ Page({
     afternoon : false,
     evening: false,
     sche_num: false,
-    colorList:[
-      "#FDE68A",//淡黄
-      "#FECACA",
-      "#A5F3FC",
-      "#C7D2FE",
-      "#D9F99D",
-      "#E5E5E5",
-      "#DDD6FE",
-      "#FBCFE8",
-      "#FFA5BB",
-      "#E7BCF3",
-      "#D8DBDA"
-    ],
-    selectWeek:0,
-    timeBean:{},
     user_token: '',
     username:'',
     Request_date:'',
@@ -40,11 +24,6 @@ Page({
     this.onRequest();
   },
   onShow: function () {
-    // this.onLoad();
-    // console.log("刷新页面");
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     this.setData({
@@ -145,19 +124,16 @@ Page({
       new_s_time_hour *= 1 ;
       new_s_time_min *= 1 ;
       const sjd = new_s_time_hour * 60 + new_s_time_min ;
-      // var idd = index.toString();
-      const bgc = this.data.colorList[ index % 11 ] 
+      const bgc = app.globalData.colorList[ index % 11 ] 
       const state1 = "shceList["+ index +"].s_time"
       const state2 = "shceList["+ index +"].e_time"
-      // const state3 = "shceList["+ index +"].id"
-      const state4 = "shceList["+ index +"].bg_color"
-      const state5 = "shceList["+ index +"].shijianduan"
+      const state3 = "shceList["+ index +"].bg_color"
+      const state4 = "shceList["+ index +"].shijianduan"
       this.setData({
           [state1]:  new_start_time,
           [state2]:  new_end_time,
-          // [state3]:  idd,
-          [state4]:  bgc,
-          [state5]:  sjd
+          [state3]:  bgc,
+          [state4]:  sjd
       })
     }
     //统计上午 下午 晚上 行程个数
@@ -216,110 +192,6 @@ Page({
       }) 
     }
   },
-  onReady: function () {
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
-  },
-  //上一周
-  lastWeek:function(e){   
-    var selectWeek = --this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0) {
-      timeBean.selectDay = 0;
-    }
-    this.setData({
-      timeBean,
-      selectWeek
-    });
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
-  //下一周
-  nextWeek:function(e){
-    var selectWeek = ++this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0){
-      timeBean.selectDay = 0;
-    }
-    this.setData({
-      timeBean,
-      selectWeek
-    })
-    // console.log(this.data.timeBean);
-    // console.log(this.data.selectWeek);
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
-  //切换日期
-  dayClick:function(e){
-    var timeBean = this.data.timeBean
-    timeBean.selectDay = e.detail;
-    this.setData({
-      timeBean
-    })
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
   //查看行程详情
   Tapiteminfo: function(e){
     var iteminfo_object = this.data.shceList.find(item => item.id == e.currentTarget.dataset.id)
@@ -328,4 +200,14 @@ Page({
         url: '../schedule_info/schedule_info?str='+ str ,
       })
   },
+    //切换日期
+    mydata(e){
+      // console.log(e);
+      let data = e.detail.data
+      // console.log(data)
+      this.setData({
+        Request_date : data
+      })
+      this.onRequest();
+     }
 })

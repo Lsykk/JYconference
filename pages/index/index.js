@@ -94,7 +94,7 @@ Page({
               _that.setData({
                 code : res.code
               })
-              console.log("拿到的code: "+_that.data.code)
+              // console.log("拿到的code: "+_that.data.code)
               const darkpassword = md5.hexMD5(_that.data.password);
               app.globalData.login = _that.data.username ;
               //登录验证参数准备
