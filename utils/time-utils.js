@@ -33,6 +33,8 @@ function getWeekDayList(selectWeek) {
 //获取当前时间戳  --
 function getCurrentTimeStamp() {
   var timestamp = new Date().getTime();
+  // console.log("获取当前时间戳 time-utils");
+  // console.log(timestamp);
   return timestamp
 }
  

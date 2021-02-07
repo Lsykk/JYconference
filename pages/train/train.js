@@ -197,19 +197,19 @@ Page({
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
-        var idd = i.toString();
+        // var idd = i.toString();
         var bgc = this.data.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
-        const state4 = "Conference_list["+ i +"].id"
+        // const state4 = "Conference_list["+ i +"].id"
         const state5 = "Conference_list["+ i +"].bg_color"
         const state6 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
-          [state4]: idd,
+          // [state4]: idd,
           [state5]: bgc,
           [state6]: length_num
         });

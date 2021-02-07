@@ -1,7 +1,10 @@
 <scorll-view scroll-y="true" style="height: 100vh;">
   <!-- 日历 -->
   <view>
-    <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar>
+    <!-- <weekCalendar timeBean="{{timeBean}}" bind:lastWeek="lastWeek" bind:nextWeek="nextWeek" bind:dayClick="dayClick"></weekCalendar> -->
+  </view>
+  <view>
+   <calendarMonth bindmydata="mydata"></calendarMonth>
   </view>
   <!-- 列表 -->
   <view class="main">

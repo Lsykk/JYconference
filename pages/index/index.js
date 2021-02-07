@@ -80,17 +80,17 @@ Page({
         'content-type': 'text/plain'
       },
       success (res) {  
-        console.log(res)
+        // console.log(res)
         _that.setData({
           access_token : res.data.access_token
         })
-        console.log("拿到的access_token: "+_that.data.access_token);
+        // console.log("拿到的access_token: "+_that.data.access_token);
         //获取code+登录验证接口
         wx.login({
           success (res) {
-            console.log(res);
+            // console.log(res);
             if (res.code) {
-              console.log('获取code成功')
+              // console.log('获取code成功')
               _that.setData({
                 code : res.code
               })
@@ -109,7 +109,7 @@ Page({
               _that.setData({
                 loginstring : paramstring
               })
-              console.log("登录验证接口的请求参数:"+_that.data.loginstring);
+              // console.log("登录验证接口的请求参数:"+_that.data.loginstring);
               //发请求 登录验证
               wx.request({
                 url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
@@ -123,7 +123,7 @@ Page({
                 success (res) {
                   app.globalData.uid = res.data.msg ;
                   if ( ! res.data.ret ) {
-                    console.log("登录成功")
+                    // console.log("登录成功")
                     Toast.success('登录成功!');
                     wx.showModal({
                           title: '温馨提示',
@@ -133,11 +133,11 @@ Page({
                           success: function (res) {
                               if (res.confirm) {
                                   //调用订阅消息
-                                  console.log('用户点击确定');
+                                  // console.log('用户点击确定');
                                   //调用订阅
                                   _that.requestSubscribe();
                               } else if (res.cancel) {
-                                  console.log('用户点击取消');
+                                  // console.log('用户点击取消');
                                   ///显示第二个弹说明一下
                                   wx.showModal({
                                     title: '温馨提示',
@@ -145,9 +145,6 @@ Page({
                                     confirmText:"知道了",
                                     showCancel:false,
                                     success: function (res) {
-                                      ///点击知道了的后续操作 
-                                      ///如跳转首页面 
-                                                //跳转至 会议中心
                                         wx.reLaunch({
                                           url:'../main/main?username='+_that.data.username
                                       })
@@ -158,7 +155,7 @@ Page({
                       });
                   }
                   else {
-                    console.log("登录失败");
+                    // console.log("登录失败");
                     Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
                   }        
                 },
@@ -176,78 +173,6 @@ Page({
         console.log(res)
       }
     })
-    // const darkpassword = md5.hexMD5(this.data.password);
-    // app.globalData.login = this.data.username ;
-    // //登录验证参数准备
-    // const param = {
-    //   login: this.data.username,
-    //   userpassword: darkpassword,
-    //   token: this.data.token,
-    //   code: this.data.code
-    // }
-    // const paramstring = JSON.stringify(param) ;
-    // this.setData({
-    //   loginstring : paramstring
-    // })
-    // //发请求 登录验证
-    // wx.request({
-    //   url: 'http://118.31.73.43:9389/wuchan/weixin/verification.jsp'+'?'+'login='+ _that.data.loginstring,
-    //   method: "post",
-    //   data: {
-    //       "login" : _that.data.loginstring
-    //   },
-    //   header: {
-    //     'content-type': 'text/plain'
-    //   },
-    //   success (res) {
-    //     app.globalData.uid = res.data.msg ;
-    //     if ( ! res.data.ret ) {
-    //       console.log("登录成功")
-    //       Toast.success('登录成功!');
-    // wx.showModal({
-    //        title: '温馨提示',
-    //        content: '为更好的管理您的日程安排，服务号需要在会议开始前向您发送提示消息',
-    //        confirmText:"同意",
-    //        cancelText:"拒绝",
-    //        success: function (res) {
-    //            if (res.confirm) {
-    //               //调用订阅消息
-    //                console.log('用户点击确定');
-    //                //调用订阅
-    //                _that.requestSubscribe();
-    //            } else if (res.cancel) {
-    //                console.log('用户点击取消');
-    //                ///显示第二个弹说明一下
-    //                wx.showModal({
-    //                  title: '温馨提示',
-    //                  content: '拒绝后您将无法收到会议提示信息!',
-    //                  confirmText:"知道了",
-    //                  showCancel:false,
-    //                  success: function (res) {
-    //                    ///点击知道了的后续操作 
-    //                    ///如跳转首页面 
-    //                              //跳转至 会议中心
-    //                     wx.reLaunch({
-    //                       url:'../main/main?username='+_that.data.username
-    //                   })
-    //                  }
-    //              });
-    //            }
-    //        }
-    //    });
-    //       // wx.reLaunch({
-    //       //   url:'../main/main?username='+_that.data.username
-    //       // })
-    //     }
-    //     else {
-    //       console.log("登录失败");
-    //       Notify({ type: 'danger', message: '用户名或密码输入错误，请重新输入！' });
-    //     }        
-    //   },
-    //   fail (res) {
-    //     console.log(res.data)
-    //   }
-    // })
   },
   ///发起消息订阅
   requestSubscribe: function(){
@@ -257,9 +182,9 @@ Page({
           success(res){
               // 模板id1的处理逻辑
               if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'accept') {
-                  console.log("用户订阅了会议通知");
+                  // console.log("用户订阅了会议通知");
               } else if (res['COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM'] === 'reject') {
-                  console.log("用户取消订阅会议通知");
+                  // console.log("用户取消订阅会议通知");
                   wx.showModal({
                     title: '提示',
                     content: '你取消订阅会议通知',
@@ -273,9 +198,9 @@ Page({
               }
               // 模板id2的处理逻辑
               if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'accept') {
-                console.log("用户订阅了日程通知");
+                // console.log("用户订阅了日程通知");
               } else if (res['qQPg60Y6DVo8U7yrWqeRYYru5s4qBz1RIyw4jEBMYkM'] === 'reject') {
-                console.log("用户取消订阅行程通知");
+                // console.log("用户取消订阅行程通知");
                 wx.showModal({
                   title: '提示',
                   content: '你取消订阅日程通知',
@@ -293,7 +218,7 @@ Page({
           },
           complete:(errMsg)=>{
             console.log("订阅消息 完成 ");
-            console.log(errMsg);
+            // console.log(errMsg);
             //跳转至 会议中心
             wx.reLaunch({
                 url:'../main/main?username='+that.data.username

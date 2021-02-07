@@ -82,14 +82,10 @@ Page({
     this.setData({
       Request_date : nowdate_deal
     })
+    console.log(this.data.Request_date);
     this.onRequest();
   },
   onShow: function () {
-    // this.onLoad();
-    // console.log("刷新页面");
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")
     this.setData({
@@ -199,67 +195,24 @@ Page({
         var length_string = length_num.toString()+"px";
         var m_top_string = m_top_num.toString() + "px";
         var titlem_top_string = titlem_top_num.toString() + "px";
-        var idd = i.toString();
+        // var idd = i.toString();
         var bgc = this.data.colorList[ i % 11 ] ;
         const state1 = "Conference_list["+ i +"].length"
         const state2 = "Conference_list["+ i +"].m_top"
         const state3 = "Conference_list["+ i +"].titlem_top"
-        const state4 = "Conference_list["+ i +"].id"
+        // const state4 = "Conference_list["+ i +"].id"
         const state5 = "Conference_list["+ i +"].bg_color"
         const state6 = "Conference_list["+ i +"].time_length"
         this.setData({
           [state2]: m_top_string,
           [state1]: length_string,
           [state3]: titlem_top_string,
-          [state4]: idd,
+          // [state4]: idd,
           [state5]: bgc,
           [state6]: length_num
         });
       }
-      //触发订阅函数
-      // for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
-      // const name = this.data.Conference_list[i].title;
-      // const time = this.data.Conference_list[i].start_time;
-      // const location = this.data.Conference_list[i].room;
-      // const other = this.data.Conference_list[i].other;
-      // let _that = this;
-      // wx.request({
-      //   url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN',
-      //   method: "post",
-      //   data: {
-      //     "touser": "OPENID",
-      //     "template_id": "COmZQC5X2dQkMd7qDV_pm2PzniWxTp_cGLtdIrkpSbM",
-      //     "page": "index",
-      //     "miniprogram_state":"developer",
-      //     "lang":"zh_CN",
-      //     "data": {
-      //         "thing1": {
-      //             "value": "嘉悦物产集团"
-      //         },
-      //         "thing2": {
-      //             "value": name
-      //         },
-      //         "date3": {
-      //             "value": time
-      //         } ,
-      //         "thing4": {
-      //             "value": location
-      //         },
-      //         "thing5": {
-      //           "value": other
-      //       }
-      //     }
-      //   },
-      //   method: 'post', 
-      //   success(res){
-      //     console.log(res); 
-      //   }
-      // })
-    // }
     // console.log(this.data.Conference_list);
-
-
-
 
       //会议室分组 根据地点
       for ( var i = 0 ; i < this.data.Conference_list.length ; i++) {
@@ -281,25 +234,6 @@ Page({
         shanghai_b : this.data.Conference_list,
         thirty_eight_b : this.data.Conference_list
       });
-      // console.log("this.data.thirty_b");
-      // console.log(this.data.thirty_b);
-      // console.log("this.data.thirty_s");
-      // console.log(this.data.thirty_s);
-      // console.log("this.data.thirty_eight_s");
-      // console.log(this.data.thirty_eight_s);
-      // console.log("this.data.shanghai_b");
-      // console.log(this.data.shanghai_b);
-      // console.log("this.data.thirty_eight_b");
-      // console.log(this.data.thirty_eight_b);
-  },
-  onReady: function () {
-    this.setData({
-      timeBean: utils.getWeekDayList(this.data.selectWeek)
-    })
-  },
-  formatDate(date) {
-    date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
   },
   //查看会议详情
   Tapiteminfo: function(e){
@@ -309,101 +243,14 @@ Page({
         url: '../info/info?str='+ str ,
       })
   },
-  //点击上一周
-  lastWeek:function(e){   
-    var selectWeek = --this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0) {
-      timeBean.selectDay = 0;
-    }
+  mydata(e){ //可获取日历点击事件
+    let data = e.detail.data
+    // console.log(data)
     this.setData({
-      timeBean,
-      selectWeek
-    });
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
+      Request_date : data
     })
-    // console.log(this.data.Request_date);
     this.onRequest();
-  },
-  //点击下一周
-  nextWeek:function(e){
-    var selectWeek = ++this.data.selectWeek;
-    var timeBean = this.data.timeBean
-    timeBean = utils.getWeekDayList(selectWeek)
-    if (selectWeek != 0){
-      timeBean.selectDay = 0;
-    }
-    this.setData({
-      timeBean,
-      selectWeek
-    })
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  },
-  //切换日期
-  dayClick:function(e){
-    var timeBean = this.data.timeBean
-    timeBean.selectDay = e.detail;
-    this.setData({
-      timeBean
-    })
-    if( this.data.timeBean.yearMonth.length < 7){
-      const state1 = "timeBean.yearMonth";
-      const change_month = "2021-0" + this.data.timeBean.yearMonth.charAt(this.data.timeBean.yearMonth.length - 1);
-        this.setData({
-          [state1]: change_month
-        });
-    }
-    if(typeof(this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day)!='string'){
-      if( this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day < 10){
-        const state2 = "timeBean.weekDayList["+this.data.timeBean.selectDay+"].day";
-        const change_day = "0" + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day;
-          this.setData({
-            [state2]: change_day
-          });
-      }
-    }
-    this.setData({
-      Request_date: this.data.timeBean.yearMonth + '-' + this.data.timeBean.weekDayList[this.data.timeBean.selectDay].day
-    })
-    // console.log(this.data.Request_date);
-    this.onRequest();
-  }
+   }
+
+
 })

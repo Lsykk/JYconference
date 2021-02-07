@@ -145,17 +145,17 @@ Page({
       new_s_time_hour *= 1 ;
       new_s_time_min *= 1 ;
       const sjd = new_s_time_hour * 60 + new_s_time_min ;
-      var idd = index.toString();
+      // var idd = index.toString();
       const bgc = this.data.colorList[ index % 11 ] 
       const state1 = "shceList["+ index +"].s_time"
       const state2 = "shceList["+ index +"].e_time"
-      const state3 = "shceList["+ index +"].id"
+      // const state3 = "shceList["+ index +"].id"
       const state4 = "shceList["+ index +"].bg_color"
       const state5 = "shceList["+ index +"].shijianduan"
       this.setData({
           [state1]:  new_start_time,
           [state2]:  new_end_time,
-          [state3]:  idd,
+          // [state3]:  idd,
           [state4]:  bgc,
           [state5]:  sjd
       })

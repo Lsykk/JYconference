@@ -3,6 +3,7 @@
   "navigationBarTitleText": "会议中心",
   "navigationBarTextStyle": "black",
   "usingComponents": {
-    "weekCalendar": "../../components/weekCalendar/weekCalendar"
+    "weekCalendar": "../../components/weekCalendar/weekCalendar",
+    "calendarMonth": "../../components/calendarWeek/index"
   }
 }
