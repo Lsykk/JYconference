@@ -1,5 +1,4 @@
 var util = require("../../utils/util");
-var utils = require("../../utils/time-utils");
 var app = getApp();
 import md5 from "../../utils/MD5";
 var app = getApp()

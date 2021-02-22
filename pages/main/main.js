@@ -5,54 +5,17 @@ Page({
   data: {
     meeting_num: false,
     Conference_list: [],
-    date: '',
-    time_line:[
-      {
-        time: '08:30'
-      },
-      {
-        time: '09:30'
-      },
-      {
-        time: '10:30'
-      },
-      {
-        time: '11:30'
-      },
-      {
-        time: '12:30'
-      },
-      {
-        time: '13:30'
-      },
-      {
-        time: '14:30'
-      },
-      {
-        time: '15:30'
-      },
-      {
-        time: '16:30'
-      },
-      {
-        time: '17:30'
-      },
-      {
-        time: '18:30'
-      },
-      {
-        time: '19:30'
-      }
-    ],
     user_token: '',
     username:'',
     Request_date:'',
     Paramstring:'',
-    Meetingstring:''
+    Meetingstring:'',
+    time_line:[]
   },
   onLoad: function (option) {
     this.setData({
-      username: option.username
+      username : option.username,
+      time_line : app.globalData.time_line
     });
     let nowdate = util.formatTime(new Date()) ;
     let nowdate_deal = nowdate.substr(0,10).replace(new RegExp("/","gm"),"-")

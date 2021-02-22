@@ -9,7 +9,6 @@
 .cell_group {
   height: 250rpx;
 }
-
 .cell_group van-cell-group {
   display: block;
   margin: 20rpx;
@@ -30,7 +29,6 @@
 .logo2 image {
   width: 100px;
   height: 100px;
-  
   /* display: block; */
   /* margin: 150px auto; */
 }

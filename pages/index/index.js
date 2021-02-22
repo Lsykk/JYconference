@@ -4,6 +4,7 @@ import md5 from "../../utils/MD5";
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 var app = getApp();
+
 Page({
   data: {
     username:'',
@@ -85,6 +86,7 @@ Page({
           access_token : res.data.access_token
         })
         // console.log("拿到的access_token: "+_that.data.access_token);
+        
         //获取code+登录验证接口
         wx.login({
           success (res) {

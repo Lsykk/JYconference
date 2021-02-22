@@ -24,7 +24,6 @@
   </van-row>
   <van-row class="view_attendee">
    <view class="other">
-      <!-- <text>{{confo_info.attendee}}</text> -->
       <view style="margin-bottom: 50rpx;">{{confo_info.attendee}}</view>
    </view>
   </van-row>

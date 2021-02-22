@@ -16,7 +16,8 @@ Component({
     dateCurrent: new Date(), // 正选择的当前日期
     dateCurrentStr: '', // 正选择日期的 id
     dateMonth: '1月', // 正显示的月份
-    dateListArray: ['日', '一', '二', '三', '四', '五', '六']
+    dateListArray: ['日', '一', '二', '三', '四', '五', '六'],
+    flag : true
  },
  ready: function () {
     var that = this;
@@ -125,6 +126,7 @@ Component({
       key = 'nextMonth'
    }
    if (key == 'lastMonth') {
+      // console.log('触发lastMonth');
       var str = this.data.dateList[this.data.swiperCurrent - 1].days[0].id;
       this.setData({ dateCurrentStr: str });
       this.triggerEvent('mydata', { data: str })
@@ -144,9 +146,20 @@ Component({
       })
    }
  if (key == 'nextMonth') {
-   var str = this.data.dateList[this.data.swiperCurrent + 1].days[0].id;
-   this.setData({ dateCurrentStr: str });
-   this.triggerEvent('mydata', { data: str })
+   // console.log('触发nextMonth');
+   // console.log( this.data.flag );
+   
+   if ( this.data.flag ) {
+      this.setData({
+         flag : false
+      })
+   }
+   else {
+      var str = this.data.dateList[this.data.swiperCurrent + 1].days[0].id;
+      this.setData({ dateCurrentStr: str });
+      this.triggerEvent('mydata', { data: str })
+   }
+
 
    let indexne = 0
    let aa = 0
